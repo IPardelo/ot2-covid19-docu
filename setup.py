@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="ot2-covid-pkg-sergas",
+    name="ot2-sergas",
     version="1.0.0",
     author="Luis Lorenzo Mosquera, Victor Soroña Pombo, Ismael Castiñeira Paz",
     author_email="luislm@improvingmetrics.com, victorsp@improvingmetrics.com, ismael.castineira@ciberexperis.es",
