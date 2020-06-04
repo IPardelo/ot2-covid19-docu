@@ -7,7 +7,7 @@ from general.configure_static_ip import set_static_ip
 from opentrons import robot
 
 if not robot.is_simulating():
-    rename('__sbr2')
+    rename('sbr2')
     set_static_ip(IP.replace('x', '55'))
 
 robot.comment("Please, reboot")
