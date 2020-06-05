@@ -1,6 +1,6 @@
 import time
 
-# from opentrons.drivers.rpi_drivers import gpio
+from opentrons.drivers.rpi_drivers import gpio
 from opentrons.types import Point
 
 
@@ -31,10 +31,10 @@ def move_vol_multichannel(pipette, reagent, source, dest, vol, air_gap_vol, x_of
     pipette.aspirate(vol, s)
     # If there is air_gap_vol, switch pipette to slow speed
     if air_gap_vol != 0:
-        pipette.aspirate(air_gap_vol, source.top(z=-2), rate=reagent.flow_rate_aspirate)
+        pipette.aspirate(air_gap_vol, source.top(z=-2), rate=reagent.get('flow_rate_aspirate'))
     # Go to destination
     drop = dest.top(z=disp_height).move(Point(x=x_offset[1]))
-    pipette.dispense(vol + air_gap_vol, drop, rate=reagent.flow_rate_dispense)
+    pipette.dispense(vol + air_gap_vol, drop, rate=reagent.get('flow_rate_dispense'))
     # ctx.delay(seconds=reagent.delay)
     if blow_out:
         pipette.blow_out(dest.top(z=-2))
@@ -113,7 +113,7 @@ def generate_source_table(source):
 def pick_up(pip):
     pip.pick_up_tip()
 
-"""
+
 def notify_finish_process():
     for i in range(3):
         gpio.set_rail_lights(False)
@@ -123,4 +123,3 @@ def notify_finish_process():
         gpio.set_button_light(0, 0, 1)
         time.sleep(0.3)
     gpio.set_button_light(0, 1, 0)
-"""
