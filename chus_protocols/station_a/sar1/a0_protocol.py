@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import math
 import importlib
 from opentrons import protocol_api
@@ -9,11 +11,11 @@ common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
 metadata = {
-    'protocolName': 'Station A Template version for OMEGA type reactives',
-    'author': 'Aitor Gastaminza, Alex Gasulla & José Luis Villanueva (Hospital Clinic Barcelona)',
-    'source': 'Hospital Clínic Barcelona',
+    'protocolName': 'A0',
+    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
-    'description': 'Protocol for sample setup (A) for OMEGA protocol'
+    'description': 'Dispense Phalcon buffer in 96 x tuberack'
 }
 
 # ------------------------
@@ -22,14 +24,12 @@ metadata = {
 NUM_SAMPLES = 96
 
 air_gap_vol_ci = 2
-air_gap_vol_sample = 5
 
 TNA_VOLUME = 240
 ISO_VOLUME = 280
 BEADS_VOLUME = 10
 
 volume_control = TNA_VOLUME + ISO_VOLUME + BEADS_VOLUME
-volume_sample = 200
 height_control = 0.5
 x_offset = [0, 0]
 
@@ -55,23 +55,6 @@ buffer = {
     'v_cono': v_cone_falcon,
     'vol_well_original': 50000,
     'vol_well': 50000,
-    'unused': [],
-    'col': 0,
-    'vol_well': 0
-}
-
-samples = {
-    'name': 'Samples',
-    'flow_rate_aspirate': 1,
-    'flow_rate_dispense': 1,
-    'rinse': False,
-    'delay': 0,
-    'reagent_reservoir_volume': 700 * 24,
-    'num_wells': 24,
-    'h_cono': 4,
-    'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
-    'vol_well_original': 700,
-    'vol_well': 700,
     'unused': [],
     'col': 0,
     'vol_well': 0
