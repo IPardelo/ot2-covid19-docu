@@ -4,9 +4,11 @@ import math
 import importlib
 from opentrons import protocol_api
 
+LIBRARY_PATH = '/root/ot2-covid19/library/'
+
 # Load library
-spec = importlib.util.spec_from_file_location("ot2.library.protocols.common_functions",
-                                              "/root/ot2-covid19/ot2/library/protocols/common_functions.py")
+spec = importlib.util.spec_from_file_location("library.protocols.common_functions",
+                                              "{}protocols/common_functions.py".format(LIBRARY_PATH))
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
