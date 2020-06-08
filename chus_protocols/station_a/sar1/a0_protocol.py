@@ -33,13 +33,9 @@ volume_control = TNA_VOLUME + ISO_VOLUME + BEADS_VOLUME
 height_control = 0.5
 x_offset = [0, 0]
 
-diameter_sample = 8.25
-volume_cone = 50
-
 diameter_falcon = 27
 h_cone_falcon = 17.4
 
-area_section_sample = (math.pi * diameter_sample**2) / 4
 falcon_cross_section_area = math.pi * diameter_falcon**2 / 4
 v_cone_falcon = 1 / 3*h_cone_falcon * falcon_cross_section_area
 
