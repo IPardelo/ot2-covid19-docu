@@ -24,15 +24,11 @@ metadata = {
 # ------------------------
 # Protocol parameters
 # ------------------------
-NUM_SAMPLES = 96
+NUM_DESTINATIONS = 96
 
 air_gap_vol_ci = 2
 
-TNA_VOLUME = 240
-ISO_VOLUME = 280
-BEADS_VOLUME = 10
-
-volume_control = TNA_VOLUME + ISO_VOLUME + BEADS_VOLUME
+volume_control = 300
 height_control = 0.5
 x_offset = [0, 0]
 
@@ -78,13 +74,13 @@ def run(ctx: protocol_api.ProtocolContext):
     buffer['reagent_reservoir'] = reagents.wells()[0]
 
     # Destination (in this case 96 x tuberack of 2ml)
-    rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
+    rack_num = math.ceil(NUM_DESTINATIONS / 24) if NUM_DESTINATIONS < 96 else 4
     dest_racks = [ctx.load_labware(
         'opentrons_24_tuberack_generic_2ml_screwcap', slot,
         'source tuberack with screwcap' + str(i + 1)) for i, slot in enumerate(['5', '6', '2', '3'][:rack_num])
     ]
     dest_racks = common.generate_source_table(dest_racks)
-    destinations = dest_racks[:NUM_SAMPLES]
+    destinations = dest_racks[:NUM_DESTINATIONS]
 
     # ------------------
     # Protocol
@@ -105,4 +101,4 @@ def run(ctx: protocol_api.ProtocolContext):
     p1000.drop_tip()
 
     # Notify users
-    common.notify_finish_process()
+    # common.notify_finish_process()

@@ -26,9 +26,9 @@ metadata = {
 # ------------------------
 NUM_SAMPLES = 96
 air_gap_vol_sample = 5
-volume_sample = 200
+volume_sample = 300
 diameter_sample = 8.25
-volume_cone = 50
+volume_cone = 50 # TODO
 area_section_sample = (math.pi * diameter_sample**2) / 4
 x_offset = [0,0]
 
