@@ -24,11 +24,13 @@ metadata = {
 # ------------------------
 # Protocol parameters
 # ------------------------
+POOLING = 10
 NUM_SAMPLES = 96
+
 air_gap_vol_sample = 5
-volume_sample = 300
+volume_sample = 35
 diameter_sample = 8.25
-volume_cone = 50 # TODO
+volume_cone = 35
 area_section_sample = (math.pi * diameter_sample**2) / 4
 x_offset = [0, 0]
 
@@ -38,16 +40,35 @@ sample = {
     'flow_rate_dispense': 1,
     'rinse': False,
     'delay': 0,
-    'reagent_reservoir_volume': 700 * 24,
+    'reagent_reservoir_volume': 35 * 24,
     'num_wells': 24,
     'h_cono': 4,
     'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
-    'vol_well_original': 700,
-    'vol_well': 700,
+    'vol_well_original': 35,
+    'vol_well': 35,
     'unused': [],
     'col': 0,
     'vol_well': 0
 }
+
+
+# ----------------------------
+# Aux functions
+# ----------------------------
+def split_list(l: list, n: int):
+    """
+    Split list in several chunks of n elements
+
+    :param l: list to split in chunks
+    :param n: number of elements per chunk
+
+    :return: chunk list's generator
+
+    :example of use:
+    list(split_list(list(range(0,100)), 10))
+    """
+    for i in range(0, len(l), n):
+        yield l[i:i+n]
 
 
 # ----------------------------
@@ -58,12 +79,12 @@ def run(ctx: protocol_api.ProtocolContext):
     # Load LabWare
     # ------------------------
     # Tip racks
-    tips = [ctx.load_labware('opentrons_96_filtertiprack_1000ul', slot, '1000µl filter tiprack') for slot in ['11']]
+    tips = [ctx.load_labware('opentrons_96_filtertiprack_200ul', slot, '200µl filter tiprack') for slot in ['11']]
 
     # Pipette
-    p1000 = ctx.load_instrument('p1000_single_gen2', 'right', tip_racks=tips)
+    p300 = ctx.load_instrument('p300_single_gen2', 'left', tip_racks=tips)
 
-    # Source (in this case falcon 50ml of buffer)
+    # Source (in this case X opentrons 24 tube rack 2ml)
     rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
     source_racks = [ctx.load_labware(
         'opentrons_24_tuberack_generic_2ml_screwcap', slot,
@@ -72,26 +93,29 @@ def run(ctx: protocol_api.ProtocolContext):
     sample_sources_full = common.generate_source_table(source_racks)
     sample_sources = sample_sources_full[:NUM_SAMPLES]
 
-    # Destination (in this case 96 well plate)
+    # Destination (in this case Xs well plate)
     dest_plate = ctx.load_labware('abgene_96_wellplate_800ul', '9', 'ABGENE 96 Well Plate 800 µL')
     destinations = dest_plate.wells()[:NUM_SAMPLES]
 
     # ------------------
     # Protocol
     # ------------------
-    if not p1000.hw_pipette['has_tip']:
-        common.pick_up(p1000)
+    if not p300.hw_pipette['has_tip']:
+        common.pick_up(p300)
 
-    for s, d in zip(sample_sources, destinations):
-        if not p1000.hw_pipette['has_tip']:
-            common.pick_up(p1000)
+    custom_sources = split_list(sample_sources, POOLING)
 
-        # Calculate pickup_height based on remaining volume and shape of container
-        common.move_vol_multichannel(p1000, reagent=sample, source=s, dest=d, vol=volume_sample,
-                                     air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1,
-                                     rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
-        # Drop pipette tip
-        p1000.drop_tip()
+    for sources, dest in zip(custom_sources, destinations):
+        for source in sources:
+            if not p300.hw_pipette['has_tip']:
+                common.pick_up(p300)
+
+            # Calculate pickup_height based on remaining volume and shape of container
+            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, vol=volume_sample,
+                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1,
+                                         rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
+            # Drop pipette tip
+            p300.drop_tip()
 
     # Notify users
     # common.notify_finish_process()
