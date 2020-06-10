@@ -24,9 +24,11 @@ metadata = {
 # Protocol parameters
 # ------------------------
 NUM_SAMPLES = 96
-x_offset = [0, 0]
 brand = 'seegene'
 
+
+num_cols = math.ceil(NUM_SAMPLES / 8)
+x_offset = [0, 0]
 air_gap_vol_source = 2
 diameter_sample = 8.25
 area_section_sample = (math.pi * diameter_sample**2) / 4
@@ -102,14 +104,15 @@ def run(ctx: protocol_api.ProtocolContext):
 
     # Source (master_mix in and deep-weel with NUM SAMPLES x RNA samples)
     source_master_mix = ctx.load_labware('opentrons_24_aluminumblock_generic_2ml_screwcap', '7', 'Bloque Aluminio opentrons 24 screwcaps 2000 µL')
-    source_master_mix = source_master_mix.wells()[0]
+    source_master_mix = source_master_mix.wells()
 
     source_rna_samples = ctx.load_labware('abgene_96_wellplate_800ul', '5', 'ABGENE 96 Well Plate 800 µL')
-    sources_rna = source_rna_samples.wells()[:NUM_SAMPLES]
+    sources_rna = source_rna_samples.rows()[0][:num_cols]
 
     # Destination (NUM SAMPLES x pcr plate)
     pcr_plate_destination = ctx.load_labware('abi_fast_qpcr_96_alum_opentrons_100ul', '1', 'chilled qPCR final plate')
     destinations = pcr_plate_destination.wells()[:NUM_SAMPLES]
+    destinations_by_columns = pcr_plate_destination.rows()[0][:num_cols]
 
     # ------------------
     # Protocol
@@ -126,10 +129,10 @@ def run(ctx: protocol_api.ProtocolContext):
                                      x_offset=x_offset, pickup_height=1, rinse=master_mix.get('rinse'), disp_height=-10,
                                      blow_out=True, touch_tip=True)
         i += 1
-    p20.drop_tip()
+    p20.return_tip()
 
     # Dispense RNA samples
-    for s, d in zip(sources_rna, destinations):
+    for s, d in zip(sources_rna, destinations_by_columns):
         if not m20.hw_pipette['has_tip']:
             common.pick_up(m20)
 
