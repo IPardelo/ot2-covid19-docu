@@ -18,7 +18,7 @@ metadata = {
     'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
-    'description': 'Dispense Phalcon buffer in 96 x tuberack'
+    'description': 'Dispense buffer in 96 x tuberack'
 }
 
 # ------------------------
@@ -26,7 +26,7 @@ metadata = {
 # ------------------------
 NUM_DESTINATIONS = 96
 
-air_gap_vol_ci = 2
+air_gap_vol_ci = 1
 
 volume_control = 300
 height_control = 0.5
@@ -43,16 +43,15 @@ buffer = {
     'flow_rate_aspirate': 1,
     'flow_rate_dispense': 1,
     'rinse': False,
-    'delay': 0,
-    'reagent_reservoir_volume': 50000,
+    'delay': 3,
+    'reagent_reservoir_volume': 12000,
     'num_wells': 1,
     'h_cono': (v_cone_falcon * 3 / falcon_cross_section_area),
     'v_cono': v_cone_falcon,
-    'vol_well_original': 50000,
-    'vol_well': 50000,
+    'vol_well_original': 12000,
+    'vol_well': 12000,
     'unused': [],
-    'col': 0,
-    'vol_well': 0
+    'col': 0
 }
 
 
@@ -88,12 +87,10 @@ def run(ctx: protocol_api.ProtocolContext):
     if not p1000.hw_pipette['has_tip']:
         common.pick_up(p1000)
 
-    pickup_height, _ = common.calc_height(ctx, buffer, falcon_cross_section_area, volume_control)
-
     for d in destinations:
         # Calculate pickup_height based on remaining volume and shape of container
         pickup_height, _ = common.calc_height(ctx, buffer, falcon_cross_section_area, volume_control)
-        common.move_vol_multichannel(p1000, reagent=buffer, source=buffer.get('reagent_reservoir'),
+        common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=buffer.get('reagent_reservoir'),
                                      dest=d, vol=volume_control, air_gap_vol=air_gap_vol_ci,
                                      x_offset=x_offset, pickup_height=pickup_height, rinse=buffer.get('rinse'),
                                      disp_height=height_control, blow_out=True, touch_tip=True)

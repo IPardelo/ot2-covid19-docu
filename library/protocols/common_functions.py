@@ -4,10 +4,11 @@ from opentrons.drivers.rpi_drivers import gpio
 from opentrons.types import Point
 
 
-def move_vol_multichannel(pipette, reagent, source, dest, vol, air_gap_vol, x_offset, pickup_height, rinse, disp_height,
+def move_vol_multichannel(ctx, pipette, reagent, source, dest, vol, air_gap_vol, x_offset, pickup_height, rinse, disp_height,
                           blow_out, touch_tip):
     """
 
+    :param ctx
     :param pipette:
     :param reagent:
     :param source:
@@ -25,17 +26,19 @@ def move_vol_multichannel(pipette, reagent, source, dest, vol, air_gap_vol, x_of
     """
     # Rinse before aspirating
     if rinse:
-        custom_mix(pipette, reagent, location=source, vol=vol, rounds=2, blow_out=True, mix_height=0, x_offset=x_offset)
+        custom_mix(pipette, reagent, location=source, vol=vol, rounds=4, blow_out=True, mix_height=0, x_offset=x_offset)
     # Source
     s = source.bottom(pickup_height).move(Point(x=x_offset[0]))
-    pipette.aspirate(vol, s)
+    pipette.aspirate(vol, s, rate=1.2)
     # If there is air_gap_vol, switch pipette to slow speed
     if air_gap_vol != 0:
         pipette.aspirate(air_gap_vol, source.top(z=-2), rate=reagent.get('flow_rate_aspirate'))
+    # Apply a delay, if there is any
+    ctx.delay(seconds=reagent.get('delay'))
     # Go to destination
     drop = dest.top(z=disp_height).move(Point(x=x_offset[1]))
     pipette.dispense(vol + air_gap_vol, drop, rate=reagent.get('flow_rate_dispense'))
-    # ctx.delay(seconds=reagent.delay)
+
     if blow_out:
         pipette.blow_out(dest.top(z=-2))
     if touch_tip:

@@ -24,11 +24,11 @@ metadata = {
 # ------------------------
 # Protocol parameters
 # ------------------------
-POOLING = 10
-NUM_SAMPLES = 96
+POOLING_FACTOR = 5
+NUM_SAMPLES = 95
 
 air_gap_vol_sample = 5
-volume_sample = 35
+volume_sample = 300
 diameter_sample = 8.25
 volume_cone = 35
 area_section_sample = (math.pi * diameter_sample**2) / 4
@@ -47,8 +47,7 @@ sample = {
     'vol_well_original': 35,
     'vol_well': 35,
     'unused': [],
-    'col': 0,
-    'vol_well': 0
+    'col': 0
 }
 
 
@@ -103,7 +102,7 @@ def run(ctx: protocol_api.ProtocolContext):
     if not p300.hw_pipette['has_tip']:
         common.pick_up(p300)
 
-    custom_sources = split_list(sample_sources, POOLING)
+    custom_sources = split_list(sample_sources, POOLING_FACTOR)
 
     for sources, dest in zip(custom_sources, destinations):
         for source in sources:
@@ -111,8 +110,8 @@ def run(ctx: protocol_api.ProtocolContext):
                 common.pick_up(p300)
 
             # Calculate pickup_height based on remaining volume and shape of container
-            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, vol=volume_sample,
-                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1,
+            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, vol=volume_sample / POOLING_FACTOR,
+                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1.5,
                                          rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()

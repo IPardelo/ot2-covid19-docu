@@ -38,15 +38,14 @@ sample = {
     'flow_rate_dispense': 1,
     'rinse': False,
     'delay': 0,
-    'reagent_reservoir_volume': 700 * 24,
+    'reagent_reservoir_volume': 300 * 24,
     'num_wells': 24,
     'h_cono': 4,
     'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
-    'vol_well_original': 700,
-    'vol_well': 700,
+    'vol_well_original': 300,
+    'vol_well': 300,
     'unused': [],
-    'col': 0,
-    'vol_well': 0
+    'col': 0
 }
 
 
@@ -63,7 +62,7 @@ def run(ctx: protocol_api.ProtocolContext):
     # Pipette
     p1000 = ctx.load_instrument('p1000_single_gen2', 'right', tip_racks=tips)
 
-    # Source (in this case falcon 50ml of buffer)
+    # Source
     rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
     source_racks = [ctx.load_labware(
         'opentrons_24_tuberack_generic_2ml_screwcap', slot,
@@ -87,8 +86,8 @@ def run(ctx: protocol_api.ProtocolContext):
             common.pick_up(p1000)
 
         # Calculate pickup_height based on remaining volume and shape of container
-        common.move_vol_multichannel(p1000, reagent=sample, source=s, dest=d, vol=volume_sample,
-                                     air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1,
+        common.move_vol_multichannel(ctx, p1000, reagent=sample, source=s, dest=d, vol=volume_sample,
+                                     air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1.5,
                                      rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
         # Drop pipette tip
         p1000.drop_tip()
