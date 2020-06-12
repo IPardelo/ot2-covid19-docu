@@ -4,29 +4,29 @@ from opentrons.drivers.rpi_drivers import gpio
 from opentrons.types import Point
 
 
-def move_vol_multichannel(ctx, pipette, reagent, source, dest, vol, air_gap_vol, x_offset, pickup_height, rinse, disp_height,
+def move_vol_multichannel(ctx, pipette, reagent, source, dest, vol, air_gap_vol, x_offset, pickup_height, disp_height,
                           blow_out, touch_tip):
     """
 
-    :param ctx
-    :param pipette:
-    :param reagent:
-    :param source:
-    :param dest:
-    :param vol:
-    :param air_gap_vol:
-    :param x_offset:
-    :param pickup_height:
-    :param rinse:
-    :param disp_height:
+    :param ctx: yes
+    :param pipette: labware object for pipette
+    :param reagent: parameters for this specific reagent
+    :param source: list of labware objects from which the reagent is picked
+    :param dest: list labware objects to where the reagent is dispensed
+    :param vol: volume of reagent to move from each source to each dest
+    :param air_gap_vol: volume of air to pick after aspirate
+    :param x_offset: 2 positions in x axis for the pippete: pos 0 to aspirate, pos 1 to dispense
+    :param pickup_height: height for the pipette to aspirate
+    :param disp_height: height for the pipette to dispense
     :param blow_out: if True they will be done after dispensing
     :param touch_tip: if True they will be done after dispensing
 
     :return:
     """
     # Rinse before aspirating
-    if rinse:
-        custom_mix(pipette, reagent, location=source, vol=vol, rounds=4, blow_out=True, mix_height=0, x_offset=x_offset)
+    rinse = reagent.get('rinse')
+    if rinse > 0:
+        custom_mix(pipette, reagent, location=source, vol=vol, rounds=rinse, blow_out=True, mix_height=0, x_offset=x_offset)
     # Source
     s = source.bottom(pickup_height).move(Point(x=x_offset[0]))
     pipette.aspirate(vol, s, rate=1.2)
