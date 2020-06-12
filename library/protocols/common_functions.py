@@ -73,30 +73,36 @@ def custom_mix(pipette, reagent, location, vol, rounds, blow_out, mix_height, x_
         pipette.blow_out(location.top(z=-2))
 
 
-def calc_height(ctx, reagent, cross_section_area, aspirate_volume, min_height=0.5):
+def calc_height(ctx, reagent, tube_physical_description, cross_section_area, aspirate_volume, min_height=0.5):
     """
     Calculate pickup_height based on remaining volume and shape of container
 
     :param reagent:
+    :param tube_physical_description:
     :param cross_section_area:
     :param aspirate_volume:
     :param min_height:
 
     :return:
     """
+    if not(reagent.get('vol_well_original')):
+        reagent['vol_well_original'] = reagent.get('vol_well')
+    if not (reagent.get('unused')):
+        reagent['unused'] = []
+    if not (reagent.get('col')):
+        reagent['col'] = 0
     if reagent.get('vol_well') < aspirate_volume:
-        ctx.comment('if')
         reagent.get('unused').append(reagent.get('vol_well'))
         reagent['col'] = reagent.get('col') + 1
         reagent['vol_well'] = reagent.get('vol_well_original')
-        height = (reagent.get('vol_well') - aspirate_volume - reagent.get('v_cono')) / cross_section_area
+        height = (reagent.get('vol_well') - aspirate_volume - tube_physical_description.get('v_cono')) / cross_section_area
         reagent['vol_well'] = reagent.get('vol_well') - aspirate_volume
         if height < min_height:
             height = min_height
         col_change = True
     else:
         ctx.comment('else')
-        height = (reagent.get('vol_well') - aspirate_volume - reagent.get('v_cono')) / cross_section_area
+        height = (reagent.get('vol_well') - aspirate_volume - tube_physical_description.get('v_cono')) / cross_section_area
         reagent['vol_well'] = reagent.get('vol_well') - aspirate_volume
         if height < min_height:
             height = min_height

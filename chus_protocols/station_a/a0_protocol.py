@@ -49,52 +49,40 @@ falcon_physical_description = {
 # Pipette parameters
 # ------------------------
 air_gap_vol_ci = 1
-height_control = 0.5
+pickup_height = 0.5
 x_offset = [0, 0]
 
 
 # ------------------------
-# Buffer specific parameters
+# Buffer specific parameters (INPUTS)
 # ------------------------
 buffer_dict = {
     'Lisis': {
         'flow_rate_aspirate': 1,                # multiplier
         'flow_rate_dispense': 1,                # multiplier
-        'reagent_reservoir_volume': 25000,      # total volume of reagent
-        'num_wells': 1,                         # how many wells contain this reagent
-        'col': 0
     },
     'Roche Cobas': {
         'flow_rate_aspirate': 1,                # multiplier
         'flow_rate_dispense': 1,                # multiplier
-        'reagent_reservoir_volume': 25000,      # total volume of reagent
-        'num_wells': 1,                         # how many wells contain this reagent
-        'col': 0
     },
     'UXL Longwood': {
         'flow_rate_aspirate': 1,                # multiplier
         'flow_rate_dispense': 1,                # multiplier
         'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
-        'num_wells': 1,                         # how many wells contain this reagent
-        'col': 0
     },
     'Roche Bleau': {
         'flow_rate_aspirate': 1,                # multiplier
         'flow_rate_dispense': 1,                # multiplier
         'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
-        'reagent_reservoir_volume': 25000,      # total volume of reagent
-        'num_wells': 1,                         # how many wells contain this reagent
-        'col': 0
     },
 }
-
+buffer = buffer_dict['Roche Bleau']             # selected buffer for this protocol
 
 # ------------------------
-# Protocol parameters (INPUTS)
+# Protocol parameters (OUTPUTS)
 # ------------------------
 num_destinations = 96                           # number of slots for the destination rack
 volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
-buffer = buffer_dict['Roche Bleau']             # selected buffer for this protocol
 
 
 # ----------------------------
@@ -133,7 +121,7 @@ def run(ctx: protocol_api.ProtocolContext):
         pickup_height, _ = common.calc_height(ctx, falcon_physical_description, falcon_cross_section_area, volume_to_be_moved)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
                                      vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
-                                     pickup_height=pickup_height, disp_height=height_control,
+                                     pickup_height=pickup_height, disp_height=pickup_height,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
     # Drop pipette tip
     p1000.drop_tip()

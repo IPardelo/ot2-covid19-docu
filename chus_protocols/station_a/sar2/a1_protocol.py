@@ -14,41 +14,98 @@ spec.loader.exec_module(common)
 
 
 metadata = {
-    'protocolName': 'A1',
+    'protocolName': 'A1 pooling',
     'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
     'description': 'Dispense samples from 96 x tube rack in 96 Well Plate'
 }
 
-# ------------------------
-# Protocol parameters
-# ------------------------
-POOLING_FACTOR = 5
-NUM_SAMPLES = 95
 
+# ------------------------
+# Tuberack parameters (CONSTANTS)
+# ------------------------
+MAX_NUM_OF_SOURCES = 96
+MIN_NUM_OF_SOURCES = 4
+NUM_OF_SOURCES_PER_RACK = 24
+
+
+# ------------------------
+# Pipette parameters
+# ------------------------
 air_gap_vol_sample = 5
-volume_sample = 300
-diameter_sample = 8.25
-volume_cone = 35
-area_section_sample = (math.pi * diameter_sample**2) / 4
 x_offset = [0, 0]
+pickup_height = 1.5
+dispense_height = -10
 
+
+# ------------------------
+# Sample specific parameters (INPUTS)
+# ------------------------
 sample = {
-    'name': 'Samples',
     'flow_rate_aspirate': 1,
     'flow_rate_dispense': 1,
-    'rinse': False,
-    'delay': 0,
-    'reagent_reservoir_volume': 35 * 24,
-    'num_wells': 24,
-    'h_cono': 4,
-    'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
-    'vol_well_original': 35,
-    'vol_well': 35,
-    'unused': [],
-    'col': 0
+    'vol_well': 35
 }
+
+
+# ------------------------
+# Protocol parameters (OUTPUTS)
+# ------------------------
+pooling_factor = 5
+num_samples = 95
+volume_sample_to_be_transfered = 300
+
+
+# ----------------------------
+# Main
+# ----------------------------
+def run(ctx: protocol_api.ProtocolContext):
+    # ------------------------
+    # Load LabWare
+    # ------------------------
+    # Tip racks
+    tips = [ctx.load_labware('opentrons_96_filtertiprack_200ul', slot, '200µl filter tiprack') for slot in ['11']]
+
+    # Pipette
+    p300 = ctx.load_instrument('p300_single_gen2', 'left', tip_racks=tips)
+
+    # Source (in this case X opentrons 24 tube rack 2ml)
+    rack_num = math.ceil(num_samples / NUM_OF_SOURCES_PER_RACK) if num_samples < MAX_NUM_OF_SOURCES else MIN_NUM_OF_SOURCES
+    source_racks = [ctx.load_labware(
+        'opentrons_24_tuberack_generic_2ml_screwcap', slot,
+        'source tuberack with screwcap' + str(i + 1)) for i, slot in enumerate(['5', '6', '2', '3'][:rack_num])
+    ]
+    sample_sources_full = common.generate_source_table(source_racks)
+    sample_sources = sample_sources_full[:num_samples]
+
+    # Destination (in this case Xs well plate)
+    dest_plate = ctx.load_labware('abgene_96_wellplate_800ul', '9', 'ABGENE 96 Well Plate 800 µL')
+    destinations = dest_plate.wells()[:num_samples]
+
+    # ------------------
+    # Protocol
+    # ------------------
+    if not p300.hw_pipette['has_tip']:
+        common.pick_up(p300)
+
+    custom_sources = split_list(sample_sources, pooling_factor)
+
+    for sources, dest in zip(custom_sources, destinations):
+        for source in sources:
+            if not p300.hw_pipette['has_tip']:
+                common.pick_up(p300)
+
+            # Calculate pickup_height based on remaining volume and shape of container
+            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest,
+                                         vol=volume_sample_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample,
+                                         pickup_height=pickup_height, disp_height=dispense_height,
+                                         x_offset=x_offset, blow_out=True, touch_tip=True)
+            # Drop pipette tip
+            p300.drop_tip()
+
+    # Notify users
+    # common.notify_finish_process()
 
 
 # ----------------------------
@@ -68,53 +125,3 @@ def split_list(l: list, n: int):
     """
     for i in range(0, len(l), n):
         yield l[i:i+n]
-
-
-# ----------------------------
-# Main
-# ----------------------------
-def run(ctx: protocol_api.ProtocolContext):
-    # ------------------------
-    # Load LabWare
-    # ------------------------
-    # Tip racks
-    tips = [ctx.load_labware('opentrons_96_filtertiprack_200ul', slot, '200µl filter tiprack') for slot in ['11']]
-
-    # Pipette
-    p300 = ctx.load_instrument('p300_single_gen2', 'left', tip_racks=tips)
-
-    # Source (in this case X opentrons 24 tube rack 2ml)
-    rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
-    source_racks = [ctx.load_labware(
-        'opentrons_24_tuberack_generic_2ml_screwcap', slot,
-        'source tuberack with screwcap' + str(i + 1)) for i, slot in enumerate(['5', '6', '2', '3'][:rack_num])
-    ]
-    sample_sources_full = common.generate_source_table(source_racks)
-    sample_sources = sample_sources_full[:NUM_SAMPLES]
-
-    # Destination (in this case Xs well plate)
-    dest_plate = ctx.load_labware('abgene_96_wellplate_800ul', '9', 'ABGENE 96 Well Plate 800 µL')
-    destinations = dest_plate.wells()[:NUM_SAMPLES]
-
-    # ------------------
-    # Protocol
-    # ------------------
-    if not p300.hw_pipette['has_tip']:
-        common.pick_up(p300)
-
-    custom_sources = split_list(sample_sources, POOLING_FACTOR)
-
-    for sources, dest in zip(custom_sources, destinations):
-        for source in sources:
-            if not p300.hw_pipette['has_tip']:
-                common.pick_up(p300)
-
-            # Calculate pickup_height based on remaining volume and shape of container
-            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, vol=volume_sample / POOLING_FACTOR,
-                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1.5,
-                                         rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
-            # Drop pipette tip
-            p300.drop_tip()
-
-    # Notify users
-    # common.notify_finish_process()

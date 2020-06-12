@@ -21,32 +21,39 @@ metadata = {
     'description': 'Dispense samples from 96 x tube rack in 96 Well Plate'
 }
 
-# ------------------------
-# Protocol parameters
-# ------------------------
-NUM_SAMPLES = 96
-air_gap_vol_sample = 5
-volume_sample = 995
-diameter_sample = 8.25
-volume_cone = 50
-area_section_sample = (math.pi * diameter_sample**2) / 4
-x_offset = [0,0]
 
+# ------------------------
+# Tuberack parameters (CONSTANTS)
+# ------------------------
+MAX_NUM_OF_SOURCES = 96
+MIN_NUM_OF_SOURCES = 4
+NUM_OF_SOURCES_PER_RACK = 24
+
+
+# ------------------------
+# Pipette parameters
+# ------------------------
+air_gap_vol_sample = 5
+x_offset = [0, 0]
+pickup_height = 1
+dispense_height = -10
+
+
+# ------------------------
+# Sample specific parameters (INPUTS)
+# ------------------------
 sample = {
-    'name': 'Samples',
     'flow_rate_aspirate': 1,
     'flow_rate_dispense': 1,
-    'rinse': False,
-    'delay': 0,
-    'reagent_reservoir_volume': 2000 * 24,
-    'num_wells': 24,
-    'h_cono': 4,
-    'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
-    'vol_well_original': 2000,
-    'vol_well': 2000,
-    'unused': [],
-    'col': 0
+    'vol_well': 2000
 }
+
+
+# ------------------------
+# Protocol parameters  (OUTPUTS)
+# ------------------------
+num_samples = 96
+volume_sample = 995
 
 
 # ----------------------------
@@ -63,22 +70,22 @@ def run(ctx: protocol_api.ProtocolContext):
     p1000 = ctx.load_instrument('p1000_single_gen2', 'right', tip_racks=tips)
 
     # Source
-    source_rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
+    source_rack_num = math.ceil(num_samples / NUM_OF_SOURCES_PER_RACK) if num_samples < MAX_NUM_OF_SOURCES else MIN_NUM_OF_SOURCES
     source_racks = [ctx.load_labware(
         'opentrons_24_aluminumblock_generic_2ml_screwcap', slot,
         'Bloque Aluminio opentrons 24 screwcaps 2000 µL' + str(i + 1)) for i, slot in enumerate(['10', '7', '4', '1'][:source_rack_num])
     ]
     source_racks = common.generate_source_table(source_racks)
-    sources = source_racks[:NUM_SAMPLES]
+    sources = source_racks[:num_samples]
 
     # Destination
-    rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
+    rack_num = math.ceil(num_samples / NUM_OF_SOURCES_PER_RACK) if num_samples < MAX_NUM_OF_SOURCES else MIN_NUM_OF_SOURCES
     dest_racks = [ctx.load_labware(
         'opentrons_24_tuberack_generic_2ml_screwcap', slot,
         'source tuberack with screwcap' + str(i + 1)) for i, slot in enumerate(['5', '6', '2', '3'][:rack_num])
     ]
     dest_racks = common.generate_source_table(dest_racks)
-    destinations = dest_racks[:NUM_SAMPLES]
+    destinations = dest_racks[:num_samples]
 
     # ------------------
     # Protocol
@@ -92,9 +99,9 @@ def run(ctx: protocol_api.ProtocolContext):
 
         # Calculate pickup_height based on remaining volume and shape of container
         common.move_vol_multichannel(ctx, p1000, reagent=sample, source=s, dest=d,
-                              vol=volume_sample, air_gap_vol=air_gap_vol_sample, x_offset=x_offset,
-                              pickup_height=1, rinse=sample.get('rinse'), disp_height=-10,
-                              blow_out=True, touch_tip=True)
+                              vol=volume_sample, air_gap_vol=air_gap_vol_sample,
+                              pickup_height=pickup_height, disp_height=dispense_height,
+                              x_offset=x_offset, blow_out=True, touch_tip=True)
         # Drop pipette tip
         p1000.drop_tip()
 
