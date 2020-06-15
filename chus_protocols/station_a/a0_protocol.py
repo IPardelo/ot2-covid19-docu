@@ -41,7 +41,7 @@ v_cone_falcon = 1 / 3*h_cone_falcon * falcon_cross_section_area
 
 falcon_physical_description = {
     'h_cono': (v_cone_falcon * 3 / falcon_cross_section_area),
-    'v_cono': v_cone_falcon,
+    'v_cono': v_cone_falcon
 }
 
 
@@ -49,8 +49,8 @@ falcon_physical_description = {
 # Pipette parameters
 # ------------------------
 air_gap_vol_ci = 1
-pickup_height = 0.5
 x_offset = [0, 0]
+disp_height = 0.5
 
 
 # ------------------------
@@ -76,7 +76,8 @@ buffer_dict = {
         'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
     },
 }
-buffer = buffer_dict['Roche Bleau']             # selected buffer for this protocol
+buffer = buffer_dict['Lisis']             # selected buffer for this protocol
+buffer['vol_well'] = 20000
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
@@ -108,6 +109,7 @@ def run(ctx: protocol_api.ProtocolContext):
         'opentrons_24_tuberack_generic_2ml_screwcap', slot,
         'source tuberack with screwcap' + str(i + 1)) for i, slot in enumerate(['5', '6', '2', '3'][:rack_num])
     ])
+
     destinations = dest_racks[:num_destinations]
 
     # ------------------
@@ -118,10 +120,11 @@ def run(ctx: protocol_api.ProtocolContext):
 
     for destination_labware in destinations:
         # Calculate pickup_height based on remaining volume and shape of container
-        pickup_height, _ = common.calc_height(ctx, falcon_physical_description, falcon_cross_section_area, volume_to_be_moved)
+        pickup_height, _ = common.calc_height(ctx, buffer, falcon_physical_description,
+                                              falcon_cross_section_area, volume_to_be_moved)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
                                      vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
-                                     pickup_height=pickup_height, disp_height=pickup_height,
+                                     pickup_height=pickup_height, disp_height=disp_height,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
     # Drop pipette tip
     p1000.drop_tip()

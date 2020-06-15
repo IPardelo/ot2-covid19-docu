@@ -45,7 +45,7 @@ dispense_height = -10
 sample = {
     'flow_rate_aspirate': 1,
     'flow_rate_dispense': 1,
-    'vol_well': 300,
+    'vol_well': 300
 }
 num_samples = 96                           # total number of samples
 

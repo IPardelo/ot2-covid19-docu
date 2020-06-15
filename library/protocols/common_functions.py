@@ -25,7 +25,7 @@ def move_vol_multichannel(ctx, pipette, reagent, source, dest, vol, air_gap_vol,
     """
     # Rinse before aspirating
     rinse = reagent.get('rinse')
-    if rinse > 0:
+    if rinse:
         custom_mix(pipette, reagent, location=source, vol=vol, rounds=rinse, blow_out=True, mix_height=0, x_offset=x_offset)
     # Source
     s = source.bottom(pickup_height).move(Point(x=x_offset[0]))
@@ -34,7 +34,9 @@ def move_vol_multichannel(ctx, pipette, reagent, source, dest, vol, air_gap_vol,
     if air_gap_vol != 0:
         pipette.aspirate(air_gap_vol, source.top(z=-2), rate=reagent.get('flow_rate_aspirate'))
     # Apply a delay, if there is any
-    ctx.delay(seconds=reagent.get('delay'))
+    delay = reagent.get('delay')
+    if delay:
+        ctx.delay(seconds=delay)
     # Go to destination
     drop = dest.top(z=disp_height).move(Point(x=x_offset[1]))
     pipette.dispense(vol + air_gap_vol, drop, rate=reagent.get('flow_rate_dispense'))
@@ -101,7 +103,6 @@ def calc_height(ctx, reagent, tube_physical_description, cross_section_area, asp
             height = min_height
         col_change = True
     else:
-        ctx.comment('else')
         height = (reagent.get('vol_well') - aspirate_volume - tube_physical_description.get('v_cono')) / cross_section_area
         reagent['vol_well'] = reagent.get('vol_well') - aspirate_volume
         if height < min_height:
