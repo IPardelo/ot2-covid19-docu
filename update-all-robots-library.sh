@@ -24,9 +24,9 @@
 # Constants
 # -------------------------
 IP='192.168.167.'
-SSHPASS='L@b0r4t010'
+export SSHPASS='L@b0r4t010'
 PUBLIC_KEY_PATH='~/ot-ssh-key'
-LOCAL_LIBRARY_PATH='~/Escritorio/ot2-covid19'
+LOCAL_LIBRARY_PATH='/home/luis/Escritorio/ot2-covid19'
 ROBOT_RP_USER='root'
 ROBOT_LIBRARY_PATH='/root'
 
