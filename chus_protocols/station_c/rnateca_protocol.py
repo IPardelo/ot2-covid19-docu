@@ -24,6 +24,8 @@ metadata = {
 # Protocol parameters
 # ------------------------
 NUM_SAMPLES = 96
+brand = 'vircell'
+
 x_offset = [0, 0]
 volume_source = 17      # FIXME: no deja aspirar 20?!
 air_gap_vol_source = 2
@@ -42,6 +44,44 @@ sample = {
     'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
     'vol_well_original': 20,
     'vol_well': 20,
+    'unused': [],
+    'col': 0,
+    'vol_well': 0
+}
+
+
+# following volumes in ul
+brands = {
+    'seegene': {
+        'master_mix': 17,
+        'arn': 8
+    },
+    'thermofisher': {
+        'master_mix': 15,
+        'arn': 10
+    },
+    'roche': {
+        'master_mix': 10,
+        'arn': 10
+    },
+    'vircell': {
+        'master_mix': 15,
+        'arn': 5
+    }
+}
+
+master_mix = {
+    'name': 'master mix',
+    'flow_rate_aspirate': 1,
+    'flow_rate_dispense': 1,
+    'rinse': False,
+    'delay': 0,
+    'reagent_reservoir_volume': 1500,
+    'num_wells': 1,
+    'h_cono': 4,
+    'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
+    'vol_well_original': 1500,
+    'vol_well': 1500,
     'unused': [],
     'col': 0,
     'vol_well': 0
@@ -83,8 +123,9 @@ def run(ctx: protocol_api.ProtocolContext):
 
         # 2 * 20ul ~> 40ul of rna sample
         for _ in range(2):
-            common.move_vol_multichannel(p20, reagent=sample, source=s, dest=d, vol=volume_source,
-                                         air_gap_vol=air_gap_vol_source, x_offset=x_offset, pickup_height=1,
-                                         rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
+            common.move_vol_multichannel(ctx, p20, reagent=master_mix, source=s, dest=d,
+                                     vol=brands.get(brand).get('master_mix'), air_gap_vol=air_gap_vol_source,
+                                     x_offset=x_offset, pickup_height=1, disp_height=-10,
+                                     blow_out=True, touch_tip=True)
         # Drop pipette tip
         p20.drop_tip()
