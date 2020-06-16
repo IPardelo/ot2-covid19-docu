@@ -124,9 +124,9 @@ def run(ctx: protocol_api.ProtocolContext):
             common.pick_up(p20)
         ctx.comment(str(d))
         source = source_master_mix[1] if i > 47 and brand == 'vircell' else source_master_mix[0]
-        common.move_vol_multichannel(p20, reagent=master_mix, source=source, dest=d,
+        common.move_vol_multichannel(ctx, p20, reagent=master_mix, source=source, dest=d,
                                      vol=brands.get(brand).get('master_mix'), air_gap_vol=air_gap_vol_source,
-                                     x_offset=x_offset, pickup_height=1, rinse=master_mix.get('rinse'), disp_height=-10,
+                                     x_offset=x_offset, pickup_height=1, disp_height=-10,
                                      blow_out=True, touch_tip=True)
         i += 1
     p20.return_tip()
@@ -136,8 +136,8 @@ def run(ctx: protocol_api.ProtocolContext):
         if not m20.hw_pipette['has_tip']:
             common.pick_up(m20)
 
-        common.move_vol_multichannel(m20, reagent=rna_sample, source=s, dest=d,
+        common.move_vol_multichannel(ctx, m20, reagent=rna_sample, source=s, dest=d,
                                      vol=brands.get(brand).get('arn'), air_gap_vol=air_gap_vol_source,
-                                     x_offset=x_offset, pickup_height=1, rinse=rna_sample.get('rinse'), disp_height=-10,
+                                     x_offset=x_offset, pickup_height=1, disp_height=-10,
                                      blow_out=True, touch_tip=True)
         m20.drop_tip()
