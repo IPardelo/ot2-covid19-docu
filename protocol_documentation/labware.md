@@ -53,11 +53,11 @@
 
 # Puntas
 
-<a id="puntas20"></a>  
+<a id="puntas1000"></a>  
 
-## Puntas para pipeta P20
-![puntas20](img/labware/puntas20.jpeg)
-* Capacidad: de 10µl a 20µl
+## Puntas para pipeta p1000
+![puntas1000](img/labware/puntas1000.jpeg)
+* Capacidad: de 100µl a 1000µl
 
 
 <a id="puntas300"></a>  
@@ -67,11 +67,12 @@
 * Capacidad: de 100µl a 200µl
 
 
-<a id="puntas1000"></a>  
+<a id="puntas20"></a>  
 
-## Puntas para pipeta p1000
-![puntas1000](img/labware/puntas1000.jpeg)
-* Capacidad: de 100µl a 1000µl
+## Puntas para pipeta P20
+![puntas20](img/labware/puntas20.jpeg)
+* Capacidad: de 10µl a 20µl
+
 
 # Deepwell
 
@@ -100,6 +101,13 @@
 
 # Rack
 
+<a id="rack96_alum"></a>
+
+## Rack 96 (Aluminio)
+![rack96_alum](img/labware/rack96_alum.jpeg)
+* Capacidad: 96 N/S.
+
+
 <a id="rack24"></a>
 
 ## Rack 24
@@ -121,13 +129,6 @@
 * Capacidad: 15 N/S.
 
 
-<a id="rack96_alum"></a>
-
-## Rack 96 (Aluminio)
-![rack96_alum](img/labware/rack96_alum.jpeg)
-* Capacidad: 96 N/S.
-
-
 <a id="rack4y6"></a>
 
 ## Rack 4 + 6
@@ -140,3 +141,47 @@
 ## Rack 6
 ![rack6](img/labware/rack6.jpeg)
 * Capacidad: 6 [tubos falcon](#falcon).
+
+
+# Pipetas
+
+<a id="p1000"></a>
+
+## P1000
+![p1000](img/pipetas/p1000.png)
+* Usa: [Punta p1000](#puntas1000)
+
+
+<a id="p300"></a>
+
+## P300
+![p300](img/pipetas/p300.png)
+* Usa: [Punta p300](#puntas300)
+
+<a id="p20"></a>
+
+## P20
+![p20](img/pipetas/p20.png)
+* Usa: [Punta p20](#puntas20)
+
+# Líquidos
+
+~~~
+TODO
+~~~
+
+# Módulos
+
+<a id="m_magnetico"></a>
+
+## Módulo magnético
+~~~
+TODO
+~~~
+
+<a id="m_temperatura"></a>
+
+## Módulo de temperatura
+~~~
+TODO
+~~~
