@@ -50,20 +50,20 @@ TODO
 
 ## Paso 0: pcr_full_setup
 
-Con la pipeta de [p20](labware.md/#puntas20) cojemos cantidades de XXXml de un pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en los pocillos del [rack de 96 de aluminio](labware.md/#rack96_alum).  
+Con la pipeta de [p20](labware.md/#puntas20) cojemos cantidades de 20ml de un pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en los pocillos del [rack de 96 de aluminio](labware.md/#rack96_alum).  
 ![c0-0](img/c0-0.gif)
 
-Con la pipeta de [p20 (8 canales)](labware.md/#puntas20) cojemos cantidades de XXXml de los pocillos del [deepwell de 96](labware.md/#deepwell2ml) y lo depositamos en los pocillos del [rack de 96 de aluminio](labware.md/#rack96_alum).  
+Luego, con la pipeta [p20 (8 canales)](labware.md/#puntas20) cojemos cantidades de 20ml de los pocillos del [deepwell de 96](labware.md/#deepwell2ml) y lo depositamos en los pocillos del [rack de 96 de aluminio](labware.md/#rack96_alum).  
 ![c0-1](img/c0-1.gif)
 
 ## Paso 1: pcr_setup
-Con la pipeta de [p20](labware.md/#puntas20) cojemos cantidades de XXXml de un pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en **N** coordenadas del [rack de 96 de aluminio](labware.md/#rack96_alum).
-> Ej: El contenido del primer pocillo (A1) del *rack de 24 dealuminio* se reparte en las 6 primeras columnas del *rack de 96 de aluminio* y el contenido del segundo (B1) entre 6 restantes.
+Con la pipeta de [p20](labware.md/#puntas20) cojemos cantidades de 20ml de un pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en **N** coordenadas del [rack de 96 de aluminio](labware.md/#rack96_alum).
+> Ej: El contenido del primer pocillo (A1) del *rack de 24 de aluminio* se reparte en las 6 primeras columnas del *rack de 96 de aluminio* y el contenido del segundo (B1) entre 6 restantes.
 
 ![c0](img/c1.gif)
 
 
-## Paso 1: rna_teca
+## Paso 2: rna_teca
 Con la pipeta de [p20](labware.md/#puntas20) cojemos dos veces 20µl de un pocillo del [deepwell de 96](labware.md/#deepwell2ml) y lo depositamos en UN pocillo del [rack de 24](labware.md/#rack24) (deben contener 40µl cada pocillo).  
 > Ej: Del pocillo A1 del *deepwell* deben salir 40µl para el pocillo A1 del *rack de 24*, es decir, coger dos veces 20µl.  
 
