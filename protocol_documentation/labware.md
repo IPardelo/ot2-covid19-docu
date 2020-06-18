@@ -143,27 +143,6 @@
 * Capacidad: 6 [tubos falcon](#falcon).
 
 
-# Pipetas
-
-<a id="p1000"></a>
-
-## P1000
-![p1000](img/pipetas/p1000.png)
-* Usa: [Punta p1000](#puntas1000)
-
-
-<a id="p300"></a>
-
-## P300
-![p300](img/pipetas/p300.png)
-* Usa: [Punta p300](#puntas300)
-
-<a id="p20"></a>
-
-## P20
-![p20](img/pipetas/p20.png)
-* Usa: [Punta p20](#puntas20)
-
 # Líquidos
 
 ~~~
