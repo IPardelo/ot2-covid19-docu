@@ -23,10 +23,10 @@ metadata = {
 # ------------------------
 # Protocol parameters
 # ------------------------
-NUM_SAMPLES = 96
+NUM_SAMPLES = 16
 x_offset = [0, 0]
-volume_source = 17      # FIXME: no deja aspirar 20?!
-air_gap_vol_source = 2
+volume_source = 19      # FIXME: no deja aspirar 20?!
+air_gap_vol_source = 1
 diameter_sample = 8.25
 area_section_sample = (math.pi * diameter_sample**2) / 4
 

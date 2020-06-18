@@ -25,7 +25,7 @@ metadata = {
 # Protocol parameters
 # ------------------------
 POOLING_FACTOR = 5
-NUM_SAMPLES = 95
+NUM_SAMPLES = 20
 
 air_gap_vol_sample = 5
 volume_sample = 300
@@ -93,8 +93,13 @@ def run(ctx: protocol_api.ProtocolContext):
     sample_sources = sample_sources_full[:NUM_SAMPLES]
 
     # Destination (in this case Xs well plate)
-    dest_plate = ctx.load_labware('abgene_96_wellplate_800ul', '9', 'ABGENE 96 Well Plate 800 µL')
-    destinations = dest_plate.wells()[:NUM_SAMPLES]
+    rack_num = math.ceil(NUM_SAMPLES / 24) if NUM_SAMPLES < 96 else 4
+    dest_racks = [ctx.load_labware(
+        'opentrons_24_tuberack_generic_2ml_screwcap', slot,
+        'source tuberack with screwcap' + str(i + 1)) for i, slot in enumerate(['9'][:rack_num])
+    ]
+    dest_racks = common.generate_source_table(dest_racks)
+    destinations = dest_racks[:NUM_SAMPLES]
 
     # ------------------
     # Protocol
@@ -111,7 +116,7 @@ def run(ctx: protocol_api.ProtocolContext):
 
             # Calculate pickup_height based on remaining volume and shape of container
             common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, vol=volume_sample / POOLING_FACTOR,
-                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=1.5,  # 6.5
+                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=6.5,
                                          rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()
