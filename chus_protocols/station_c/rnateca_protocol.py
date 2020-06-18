@@ -11,6 +11,12 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
     'protocolName': 'C2',
@@ -24,13 +30,15 @@ metadata = {
 # Protocol parameters
 # ------------------------
 NUM_SAMPLES = 96
-brand = 'vircell'
+brand_name = 'vircell'
 
 x_offset = [0, 0]
 volume_source = 17      # FIXME: no deja aspirar 20?!
 air_gap_vol_source = 2
 diameter_sample = 8.25
 area_section_sample = (math.pi * diameter_sample**2) / 4
+
+(brand_master_mix, arn) = lab_stuff.brands(brand_name)
 
 sample = {
     'name': 'RNA samples',
@@ -49,27 +57,7 @@ sample = {
     'vol_well': 0
 }
 
-
 # following volumes in ul
-brands = {
-    'seegene': {
-        'master_mix': 17,
-        'arn': 8
-    },
-    'thermofisher': {
-        'master_mix': 15,
-        'arn': 10
-    },
-    'roche': {
-        'master_mix': 10,
-        'arn': 10
-    },
-    'vircell': {
-        'master_mix': 15,
-        'arn': 5
-    }
-}
-
 master_mix = {
     'name': 'master mix',
     'flow_rate_aspirate': 1,
@@ -124,7 +112,7 @@ def run(ctx: protocol_api.ProtocolContext):
         # 2 * 20ul ~> 40ul of rna sample
         for _ in range(2):
             common.move_vol_multichannel(ctx, p20, reagent=master_mix, source=s, dest=d,
-                                     vol=brands.get(brand).get('master_mix'), air_gap_vol=air_gap_vol_source,
+                                     vol=brand_master_mix, air_gap_vol=air_gap_vol_source,
                                      x_offset=x_offset, pickup_height=1, disp_height=-10,
                                      blow_out=True, touch_tip=True)
         # Drop pipette tip
