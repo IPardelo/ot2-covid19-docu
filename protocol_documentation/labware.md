@@ -25,12 +25,12 @@
 * Uso: muestras
 
 
-<a id="congelacion"></a>  
+<a id="criotubo"></a>  
 
-## Tubo congelación  
-![congelacion](img/labware/congelacion.jpeg)
+## Criotubo 
+![criotubo](img/labware/congelacion.jpeg)
 * Capacidad: 2ml
-* Nomenclatura no técnica: "de 2ml"
+* Nomenclatura no técnica: "de 2ml", de congelación
 * Uso: muestras
 
 
@@ -112,14 +112,14 @@
 
 ## Rack 24
 ![rack24](img/labware/rack24.jpeg)
-* Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos ependor](#ependor) o [tubos de congelación](#congelacion).
+* Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos ependor](#ependor) o [criotubos](#criotubo).
 
 
 <a id="rack24_alum"></a>
 
 ## Rack 24 (Aluminio)
 ![rack24_alum](img/labware/rack24_alum.jpeg)
-* Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos ependor](#ependor) o [tubos de congelación](#congelacion).
+* Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos ependor](#ependor) o [criotubos](#criotubo).
 
 
 <a id="rack15"></a>
