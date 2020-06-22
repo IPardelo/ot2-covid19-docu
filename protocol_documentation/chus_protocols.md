@@ -27,7 +27,7 @@
 
 ## Paso 1: A0
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de 300µl de *buffer* del recipiente llamado [**FALCON**](labware.md/#falcon) y las distribuímos por todos los pocillos de los [racks de 24](labware.md/#rack24).  
-![a0](img/protocol_example/protocol_example/a0.gif)
+![a0](img/protocol_example/a0.gif)
 
 ## Paso 2-1: A1 (SAR1)
 
