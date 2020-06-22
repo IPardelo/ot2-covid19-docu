@@ -14,7 +14,8 @@
          (@@@@@@.
 </pre>
 
-:warning: **IMPORTANTÍSIMO: ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR** :warning:
+:warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. Para saber más consulta [los protocolos](chus_protocols.md) :warning:
+
 
 # Cómo cargar un protocolo
 Una vez [conectado a un robot](#conexion) nos dirigimos a la pestaña *PROTOCOL* y seleccionamos, luego de pulsar el boton *OPEN*, el archivo.
@@ -28,9 +29,46 @@ El robot hará una simulación al cargar el archivo y si todo sale bien, estará
 
 # Protocolo A
 
+## Protocolo A0
+```py
+# ------------------------
+# Tube physical parameters
+# ------------------------
+tube_type = 'falcon'                           # Selected tube for this protocol
+```
+
+```py
+# ------------------------
+# Buffer specific parameters (INPUTS)
+# ------------------------
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
+```
+
+```py
+# ------------------------
+# Protocol parameters (OUTPUTS)
+# ------------------------
+num_destinations = 96                           # Number of slots for the destination rack
+volume_to_be_moved = 300                        # Volume in µL to be moved from 1 source to 1 destination
+```
+## Protocolo A1 (SAR1)
+
 ```
 TODO
 ```
+
+## Protocolo A1 (SAR2)
+
+```
+TODO
+```
+
+## Protocolo A2
+
+```
+TODO
+```
+
 
 # Protocolo B
 
