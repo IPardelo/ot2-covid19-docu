@@ -16,10 +16,12 @@
 
 | Protocolo | Pipeta Izquierda | Pipeta Derecha | Labware schema |
 | -- | -- | -- | -- |
-| A | [P300 Single](labware.md/#puntas300) | [P1000 Single](labware.md/#puntas1000) | [Imagen](img/labware_schema/protocol_a.png) |
-| B | TODO | TODO | [Imagen](img/labware_schema/protocol_b.png) |
-| C | [P20 Multi](labware.md/#puntas20) | [P20 Single](labware.md/#puntas20) | [Imagen](img/labware_schema/protocol_c.png) |
-| SEC | TODO | TODO | [Imagen](img/labware_schema/protocol_sec.png) |
+| [A](#protocolo-a) | [P300 Single](labware.md/#puntas300) | [P1000 Single](labware.md/#puntas1000) | [Imagen](img/labware_schema/protocol_a.png) |
+| [B](#protocolo-b) | TODO | TODO | [Imagen](img/labware_schema/protocol_b.png) |
+| [C](#protocolo-c) | [P20 Multi](labware.md/#puntas20) | [P20 Single](labware.md/#puntas20) | [Imagen](img/labware_schema/protocol_c.png) |
+| [SEC](#protocolo-sec) | TODO | TODO | [Imagen](img/labware_schema/protocol_sec.png) |
+
+<a id="protocolo_a"></a>
 
 # Protocolo A
 
@@ -46,12 +48,15 @@ Con la pipeta [P300](labware.md/#puntas300) cojemos cantidades de XXXml de cada 
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en su correspondiente coordenada del [rack de 24](labware.md/#rack24). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
 ![a2](img/a2.gif)
 
+<a id="protocolo_b"></a>
 
 # Protocolo B
 
 ~~~
 TODO
 ~~~
+
+<a id="protocolo_c"></a>
 
 # Protocolo C
 
@@ -75,3 +80,11 @@ Con la pipeta de [P20](labware.md/#puntas20) cojemos dos veces 20µl de un pocil
 > Ej: Del pocillo A1 del *deepwell* deben salir 40µl para el pocillo A1 del *rack de 24*, es decir, coger dos veces 20µl.  
 
 ![c1](img/c2.gif)
+
+<a id="protocolo_sec"></a>
+
+# Protocolo SEC
+
+~~~
+TODO
+~~~
