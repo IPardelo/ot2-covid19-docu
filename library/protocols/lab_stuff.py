@@ -1,6 +1,5 @@
 import math
 
-
 # following volumes in ul
 def brands(brand_name):
     brands = {
@@ -64,7 +63,7 @@ def tubes(tube_tipe):
         hcono = vcono * 3 / area
     else:
         vcono = 4 * area * diameter * 0.5 / 3
-    return area, volume, diameter, vcono, hcono
+    return area, volume, vcono, hcono
 
 def buffer(buffer_name):
     buffer = {

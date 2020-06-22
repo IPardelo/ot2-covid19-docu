@@ -12,6 +12,12 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
     'protocolName': 'A0',
@@ -31,17 +37,14 @@ NUM_OF_SOURCES_PER_RACK = 24
 
 
 # ------------------------
-# Falcon tube physical parameters (to help calculating volume and pick-up height) (CONSTANTS)
+# Tube physical parameters (to help calculating volume and pick-up height) (CONSTANTS)
 # ------------------------
-diameter_falcon = 27
-h_cone_falcon = 17.4
+tube_type = 'falcon'
+(area, volume, v_cono, h_cono) = lab_stuff.brands(tube_type)
 
-falcon_cross_section_area = math.pi * diameter_falcon**2 / 4
-v_cone_falcon = 1 / 3*h_cone_falcon * falcon_cross_section_area
-
-falcon_physical_description = {
-    'h_cono': (v_cone_falcon * 3 / falcon_cross_section_area),
-    'v_cono': v_cone_falcon
+tube_physical_description = {
+    'h_cono': h_cono,
+    'v_cono': v_cono
 }
 
 
@@ -120,8 +123,8 @@ def run(ctx: protocol_api.ProtocolContext):
 
     for destination_labware in destinations:
         # Calculate pickup_height based on remaining volume and shape of container
-        pickup_height, _ = common.calc_height(ctx, buffer, falcon_physical_description,
-                                              falcon_cross_section_area, volume_to_be_moved)
+        pickup_height, _ = common.calc_height(ctx, buffer, tube_physical_description,
+                                              area, volume_to_be_moved)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
                                      vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
                                      pickup_height=pickup_height, disp_height=disp_height,

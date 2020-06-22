@@ -12,6 +12,12 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
     'protocolName': 'A1',
@@ -42,10 +48,13 @@ dispense_height = -10
 # ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
+buffer_name = 'Lisis'
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.brands(buffer_name)
+
 sample = {
-    'flow_rate_aspirate': 1,
-    'flow_rate_dispense': 1,
-    'vol_well': 300
+    'flow_rate_aspirate': flow_rate_aspirate,
+    'flow_rate_dispense': flow_rate_dispense,
+    'vol_well': vol_well
 }
 num_samples = 96                           # total number of samples
 
