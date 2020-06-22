@@ -59,28 +59,16 @@ disp_height = 0.5
 # ------------------------
 # Buffer specific parameters (INPUTS)
 # ------------------------
-buffer_dict = {
-    'Lisis': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-    },
-    'Roche Cobas': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-    },
-    'UXL Longwood': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-        'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
-    },
-    'Roche Bleau': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-        'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
-    },
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
+
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
+buffer = {
+    'flow_rate_aspirate': flow_rate_aspirate,
+    'flow_rate_dispense': flow_rate_dispense,
+    'delay': delay,
+    'vol_well': vol_well
 }
-buffer = buffer_dict['Lisis']             # selected buffer for this protocol
-buffer['vol_well'] = 20000
+
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
