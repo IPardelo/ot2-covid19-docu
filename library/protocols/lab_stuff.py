@@ -1,5 +1,6 @@
 import math
 
+
 # following volumes in ul
 def brands(brand_name):
     brands = {
@@ -23,6 +24,7 @@ def brands(brand_name):
     mastermix = brands.get(brand_name).get('mastermix')
     arn = brands.get(brand_name).get('arn')
     return mastermix, arn
+
 
 def tubes(tube_tipe):
     tubes = {
@@ -64,6 +66,7 @@ def tubes(tube_tipe):
     else:
         vcono = 4 * area * diameter * 0.5 / 3
     return area, volume, vcono, hcono
+
 
 def buffer(buffer_name):
     buffer = {

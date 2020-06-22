@@ -40,11 +40,11 @@ NUM_OF_SOURCES_PER_RACK = 24
 # Tube physical parameters (to help calculating volume and pick-up height) (CONSTANTS)
 # ------------------------
 tube_type = 'falcon'
-(area, volume, v_cono, h_cono) = lab_stuff.brands(tube_type)
+(area, volume, vcono, hcono) = lab_stuff.tubes(tube_type)
 
 tube_physical_description = {
-    'h_cono': h_cono,
-    'v_cono': v_cono
+    'h_cono': hcono,
+    'v_cono': vcono
 }
 
 
