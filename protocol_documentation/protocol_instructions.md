@@ -32,41 +32,75 @@ El robot hará una simulación al cargar el archivo y si todo sale bien, estará
 ## Protocolo A0
 ```py
 # ------------------------
-# Tube physical parameters
-# ------------------------
-tube_type = 'falcon'                           # Selected tube for this protocol
-```
-
-```py
-# ------------------------
 # Buffer specific parameters (INPUTS)
 # ------------------------
 buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_source = 'falcon'                     # Selected tube for this protocol
 ```
 
 ```py
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-num_destinations = 96                           # Number of slots for the destination rack
-volume_to_be_moved = 300                        # Volume in µL to be moved from 1 source to 1 destination
+num_destinations = 96                           # number of slots for the destination rack
+volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
+tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
 ```
+
 ## Protocolo A1 (SAR1)
 
+```py
+# ------------------------
+# Sample specific parameters (INPUTS)
+# ------------------------
+buffer_name = 'Lisis'                      # Selected buffer for this protocol
+num_samples = 96                           # total number of samples
+tube_type_source = 'ependor'                 # Selected source tube for this protocol
 ```
-TODO
+
+```py
+# ------------------------
+# Protocol parameters (OUTPUTS)
+# ------------------------
+num_destinations = 96                      # total number of destinations
+volume_to_be_transfered = 300              # volume in uL to be moved from 1 source to 1 destination
 ```
+
 
 ## Protocolo A1 (SAR2)
 
+```py
+buffer_name = 'Lisis'                        # Selected buffer for this protocol
+tube_type_source = 'ependor'                 # Selected destination tube for this protocol                        # Selected buffer for this protocol
 ```
-TODO
+
+```py
+# ------------------------
+# Protocol parameters (OUTPUTS)
+# ------------------------
+num_samples = 95                      # total number of destinations
+volume_to_be_transfered = 300         # volume in uL to be moved from 1 source to 1 destination
+pooling_factor = 5                    # num of destinations per source
 ```
+> El primer parámetro es el número total de destinos y el segundo, la cantidad de líquido a insertar (en µL). El tercer parámetro es el número de origenes para un destino.  
+**P. ej: Si *pooling_factor* es igual a 5 --> A1, B1, C1, D1, A2 del rack, van al A1 del deepwell**
 
 ## Protocolo A2
 
+```py
+# ------------------------
+# Sample specific parameters (INPUTS)
+# ------------------------
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
 ```
-TODO
+
+```py
+# ------------------------
+# Protocol parameters  (OUTPUTS)
+# ------------------------
+num_samples = 96
+volume_sample = 995
 ```
 
 
