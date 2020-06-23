@@ -38,6 +38,9 @@ buffer_name = 'Lisis'                           # Selected buffer for this proto
 tube_type_source = 'falcon'                     # Selected tube for this protocol
 ```
 
+> **1er parámetro:** establece el buffer a utilizar.  
+**2º parámetro:** tipo de tubo de origen (tubo en el que va a ir el buffer).
+
 ```py
 # ------------------------
 # Protocol parameters (OUTPUTS)
@@ -46,6 +49,11 @@ num_destinations = 96                           # number of slots for the destin
 volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
 tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
 ```
+
+> **1er parámetro:** establece el número total de tubos a atender (como destino).  
+**2º parámetro:** cantidad en µL a dispensar de buffer.  
+**3er parámetro:** tipo de tubo a usar como destino.
+
 
 ## Protocolo A1 (SAR1)
 
@@ -58,6 +66,10 @@ num_samples = 96                           # total number of samples
 tube_type_source = 'ependor'                 # Selected source tube for this protocol
 ```
 
+> **1er parámetro:** establece el buffer a utilizar.  
+**2º parámetro:** establece el número total de tubos a atender (como origen).  
+**3er parámetro:** tipo de tubo a usar como origen.
+
 ```py
 # ------------------------
 # Protocol parameters (OUTPUTS)
@@ -66,13 +78,22 @@ num_destinations = 96                      # total number of destinations
 volume_to_be_transfered = 300              # volume in uL to be moved from 1 source to 1 destination
 ```
 
+> **1er parámetro:** establece el número total de tubos a atender (como destino).  
+**2º parámetro:** cantidad en µL a dispensar.
+
 
 ## Protocolo A1 (SAR2)
 
 ```py
+# ------------------------
+# Sample specific parameters (INPUTS)
+# ------------------------
 buffer_name = 'Lisis'                        # Selected buffer for this protocol
 tube_type_source = 'ependor'                 # Selected destination tube for this protocol                        # Selected buffer for this protocol
 ```
+
+> **1er parámetro:** establece el buffer a utilizar.  
+**2º parámetro:** tipo de tubo de origen (tubo en el que va a ir el buffer).
 
 ```py
 # ------------------------
@@ -82,8 +103,11 @@ num_samples = 95                      # total number of destinations
 volume_to_be_transfered = 300         # volume in uL to be moved from 1 source to 1 destination
 pooling_factor = 5                    # num of destinations per source
 ```
-> El primer parámetro es el número total de destinos y el segundo, la cantidad de líquido a insertar (en µL). El tercer parámetro es el número de origenes para un destino.  
-**P. ej: Si *pooling_factor* es igual a 5 --> A1, B1, C1, D1, A2 del rack, van al A1 del deepwell**
+> **1er parámetro:** número total de destinos.  
+**2º parámetro:** cantidad en µL a dispensar.  
+**3er parámetro:** número de origenes para un destino.  
+**P. ej:** Si *pooling_factor* es igual a 4 -> `las coordenadas A1, B1, C1, D1 del rack, van al A1 del deepwell`
+
 
 ## Protocolo A2
 
@@ -95,6 +119,9 @@ buffer_name = 'Lisis'                           # Selected buffer for this proto
 tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
 ```
 
+> **1er parámetro:** establece el buffer a utilizar.  
+**2º parámetro:** tipo de tubo de origen (tubo en el que va a ir el buffer).
+
 ```py
 # ------------------------
 # Protocol parameters  (OUTPUTS)
@@ -102,6 +129,8 @@ tube_type_dest = 'ependor'                      # Selected destination tube for 
 num_samples = 96
 volume_sample = 995
 ```
+
+>
 
 
 # Protocolo B

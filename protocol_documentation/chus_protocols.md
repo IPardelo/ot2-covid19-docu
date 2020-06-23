@@ -27,12 +27,14 @@
 
 ## Paso 1: A0
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de 300µl de *buffer* del recipiente llamado [**FALCON**](labware.md/#falcon) y las distribuímos por todos los pocillos de los [racks de 24](labware.md/#rack24).  
+
 ![a0](img/protocol_example/a0.gif)
 
 ## Paso 2-1: A1 (SAR1)
 
 Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24](labware.md/#rack24) y se coloca en la coordenada correspondiente en el [deepwell  de 96](labware.md/#deepwell2ml). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
+
 ![a1](img/protocol_example/a1-1.gif)
 
 ## Paso 2-2: A1 (SAR2)
@@ -46,6 +48,7 @@ Con la pipeta [P300](labware.md/#puntas300) cojemos cantidades de XXXml de cada 
 ## Paso 3: A2
 
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en su correspondiente coordenada del [rack de 24](labware.md/#rack24). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
+
 ![a2](img/protocol_example/a2.gif)
 
 <a id="protocolo_b"></a>
@@ -63,9 +66,11 @@ TODO
 ## Paso 0: pcr_full_setup
 
 Con la pipeta de [P20](labware.md/#puntas20) cojemos cantidades de 20ml de un pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en los pocillos del [rack de 96 de aluminio](labware.md/#rack96_alum).  
+
 ![c0-0](img/protocol_example/c0-0.gif)
 
 Luego, con la pipeta [P20 (8 canales)](labware.md/#puntas20) cojemos cantidades de 20ml de los pocillos del [deepwell de 96](labware.md/#deepwell2ml) y lo depositamos en los pocillos del [rack de 96 de aluminio](labware.md/#rack96_alum).  
+
 ![c0-1](img/protocol_example/c0-1.gif)
 
 ## Paso 1: pcr_setup
