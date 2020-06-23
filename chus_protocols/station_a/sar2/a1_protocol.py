@@ -50,7 +50,7 @@ dispense_height = -10
 buffer_name = 'Lisis'                        # Selected buffer for this protocol
 tube_type_source = 'ependor'                 # Selected destination tube for this protocol
 
-(_, _, _, _, hpick) = lab_stuff.tubes(tube_type_dest)
+(_, _, _, _, hpick) = lab_stuff.tubes(tube_type_source)
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
@@ -62,9 +62,9 @@ sample = {
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-pooling_factor = 5
-num_samples = 95
-volume_to_be_transfered = 300
+num_samples = 95                      # total number of destinations
+volume_to_be_transfered = 300         # volume in uL to be moved from 1 source to 1 destination
+pooling_factor = 5                    # num of destinations per source
 
 
 # ----------------------------

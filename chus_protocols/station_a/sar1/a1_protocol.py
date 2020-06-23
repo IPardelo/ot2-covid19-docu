@@ -49,7 +49,7 @@ dispense_height = -10
 # ------------------------
 buffer_name = 'Lisis'                      # Selected buffer for this protocol
 num_samples = 96                           # total number of samples
-tube_type_source = 'ependor'                 # Selected source tube for this protocol
+tube_type_source = 'ependor'               # Selected source tube for this protocol
 
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 (_, _, _, _, hpick) = lab_stuff.tubes(tube_type_source)

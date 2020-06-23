@@ -61,8 +61,8 @@ sample = {
 # ------------------------
 # Protocol parameters  (OUTPUTS)
 # ------------------------
-num_samples = 96
-volume_sample = 995
+num_samples = 96                                # num of samples
+volume_sample = 995                             # final volume of sample
 
 
 # ----------------------------
