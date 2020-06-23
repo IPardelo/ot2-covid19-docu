@@ -47,9 +47,9 @@ dispense_height = -10
 # ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
-buffer_name = 'Lisis'
-(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
 
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
     'flow_rate_dispense': flow_rate_dispense,

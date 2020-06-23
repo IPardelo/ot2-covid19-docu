@@ -48,9 +48,9 @@ dispense_height = -10
 # ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
-buffer_name = 'Lisis'
-(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
 
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
     'flow_rate_dispense': flow_rate_dispense,
@@ -61,10 +61,9 @@ sample = {
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-pooling_factor = 5
-num_samples = 95
-volume_sample_to_be_transfered = 300
-
+num_samples = 96                                    # total number of destinations
+volume_sample_to_be_transfered = 300                # volume in uL to be moved from 1 source to 1 destination
+pooling_factor = 5                                  # Number of sources to destination. Ex: pooling_factor = 5 --> A1, B1, C1, D1 & A2 to A1 in the deepwell
 
 # ----------------------------
 # Main

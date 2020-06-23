@@ -73,8 +73,8 @@ buffer = {
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-num_destinations = 96                           # number of slots for the destination rack
-volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
+num_destinations = 96                      # total number of destinations
+volume_to_be_transfered = 300              # volume in uL to be moved from 1 source to 1 destination
 
 
 # ----------------------------
@@ -112,9 +112,9 @@ def run(ctx: protocol_api.ProtocolContext):
     for destination_labware in destinations:
         # Calculate pickup_height based on remaining volume and shape of container
         pickup_height, _ = common.calc_height(ctx, buffer, tube_physical_description,
-                                              area, volume_to_be_moved)
+                                              area, volume_to_be_transfered)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
-                                     vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
+                                     vol=volume_to_be_transfered, air_gap_vol=air_gap_vol_ci,
                                      pickup_height=pickup_height, disp_height=disp_height,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
     # Drop pipette tip
