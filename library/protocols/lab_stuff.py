@@ -29,34 +29,32 @@ def brands(brand_name):
 def tubes(tube_tipe):
     tubes = {
         'falcon': {
-            'volume': 4000,
             'diameter': 28,
             'hcono': 14 #17.4
         },
-        'ependor1.5': {
-            'volume': 1500,
+        'ependor': {
             'diameter': 9,
-            'hcono': 19
-        },
-        'ependor2': {
-            'volume': 2000,
-            'diameter': 9,
+            'hdisp': -2,
+            'hpick': 1.5,
             'hcono': 19
         },
         'criotubo': {
-            'volume': 2000,
             'diameter': 8,
+            'hdisp': 0.5,
+            'hpick': 2,
             'hcono': 2
         },
         'f_redondo': {
-            'volume': 3000,
             'diameter': 9,
+            'hdisp': -5,
+            'hpick': -10,
             'hcono': 3
         }
     }
-    volume = tubes.get(tube_tipe).get('volume')
     diameter = tubes.get(tube_tipe).get('diameter')
     hcono = tubes.get(tube_tipe).get('hcono')
+    hdisp = tubes.get(tube_tipe).get('hdisp')
+    hpick = tubes.get(tube_tipe).get('hpick')
     #Calculos
     area = (math.pi * diameter**2) / 4
 
@@ -65,7 +63,7 @@ def tubes(tube_tipe):
         hcono = vcono * 3 / area
     else:
         vcono = 4 * area * diameter * 0.5 / 3
-    return area, volume, vcono, hcono
+    return area, vcono, hcono, hdisp, hpick
 
 
 def buffer(buffer_name):

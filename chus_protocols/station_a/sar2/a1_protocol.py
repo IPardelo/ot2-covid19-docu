@@ -41,15 +41,16 @@ NUM_OF_SOURCES_PER_RACK = 24
 # ------------------------
 air_gap_vol_sample = 5
 x_offset = [0, 0]
-pickup_height = 1.5
 dispense_height = -10
 
 
 # ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
-buffer_name = 'Lisis'                           # Selected buffer for this protocol
+buffer_name = 'Lisis'                        # Selected buffer for this protocol
+tube_type_source = 'ependor'                 # Selected destination tube for this protocol
 
+(_, _, _, _, hpick) = lab_stuff.tubes(tube_type_dest)
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
@@ -61,9 +62,10 @@ sample = {
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-num_samples = 96                                    # total number of destinations
-volume_sample_to_be_transfered = 300                # volume in uL to be moved from 1 source to 1 destination
-pooling_factor = 5                                  # Number of sources to destination. Ex: pooling_factor = 5 --> A1, B1, C1, D1 & A2 to A1 in the deepwell
+pooling_factor = 5
+num_samples = 95
+volume_to_be_transfered = 300
+
 
 # ----------------------------
 # Main
@@ -106,8 +108,8 @@ def run(ctx: protocol_api.ProtocolContext):
 
             # Calculate pickup_height based on remaining volume and shape of container
             common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest,
-                                         vol=volume_sample_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample,
-                                         pickup_height=pickup_height, disp_height=dispense_height,
+                                         vol=volume_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample,
+                                         pickup_height=hpick, disp_height=dispense_height,
                                          x_offset=x_offset, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()

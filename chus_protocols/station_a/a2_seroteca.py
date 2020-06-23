@@ -41,14 +41,15 @@ NUM_OF_SOURCES_PER_RACK = 24
 air_gap_vol_sample = 5
 x_offset = [0, 0]
 pickup_height = 1
-dispense_height = -10
 
 
 # ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
 buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
 
+(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
@@ -108,7 +109,7 @@ def run(ctx: protocol_api.ProtocolContext):
         # Calculate pickup_height based on remaining volume and shape of container
         common.move_vol_multichannel(ctx, p1000, reagent=sample, source=s, dest=d,
                               vol=volume_sample, air_gap_vol=air_gap_vol_sample,
-                              pickup_height=pickup_height, disp_height=dispense_height,
+                              pickup_height=pickup_height, disp_height=hdisp,
                               x_offset=x_offset, blow_out=True, touch_tip=True)
         # Drop pipette tip
         p1000.drop_tip()

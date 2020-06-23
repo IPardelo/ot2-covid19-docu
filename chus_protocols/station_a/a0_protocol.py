@@ -37,29 +37,17 @@ NUM_OF_SOURCES_PER_RACK = 24
 
 
 # ------------------------
-# Tube physical parameters
-# ------------------------
-tube_type = 'falcon'                           # Selected tube for this protocol
-(area, volume, vcono, hcono) = lab_stuff.tubes(tube_type)
-
-tube_physical_description = {
-    'h_cono': hcono,
-    'v_cono': vcono
-}
-
-
-# ------------------------
 # Pipette parameters
 # ------------------------
 air_gap_vol_ci = 1
 x_offset = [0, 0]
-disp_height = 0.5
 
 
 # ------------------------
 # Buffer specific parameters (INPUTS)
 # ------------------------
 buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_source = 'falcon'                     # Selected tube for this protocol
 
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
 buffer = {
@@ -68,13 +56,21 @@ buffer = {
     'delay': delay,
     'vol_well': vol_well
 }
+(area_source, vcono_source, hcono_source, _, _) = lab_stuff.tubes(tube_type_source)
+tube_physical_description = {
+    'h_cono': hcono_source,
+    'v_cono': vcono_source
+}
 
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-num_destinations = 96                      # total number of destinations
-volume_to_be_transfered = 300              # volume in uL to be moved from 1 source to 1 destination
+num_destinations = 96                           # number of slots for the destination rack
+volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
+tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
+
+(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
 
 
 # ----------------------------
@@ -112,10 +108,10 @@ def run(ctx: protocol_api.ProtocolContext):
     for destination_labware in destinations:
         # Calculate pickup_height based on remaining volume and shape of container
         pickup_height, _ = common.calc_height(ctx, buffer, tube_physical_description,
-                                              area, volume_to_be_transfered)
+                                              area_source, volume_to_be_moved)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
-                                     vol=volume_to_be_transfered, air_gap_vol=air_gap_vol_ci,
-                                     pickup_height=pickup_height, disp_height=disp_height,
+                                     vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
+                                     pickup_height=pickup_height, disp_height=hdisp,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
     # Drop pipette tip
     p1000.drop_tip()
