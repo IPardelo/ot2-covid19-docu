@@ -30,7 +30,7 @@ def tubes(tube_tipe):
     tubes = {
         'falcon': {
             'diameter': 28,
-            'hcono': 14 #17.4
+            'hcono': 14         #previously it was: 17.4
         },
         'eppendorf': {
             'diameter': 9,
