@@ -41,7 +41,7 @@ NUM_OF_SOURCES_PER_RACK = 24
 # ------------------------
 reagent_name = 'Sample'                           # Selected buffer for this protocol
 tube_type_source = 'criotubo'                  # Selected destination tube for this protocol
-
+pickup_height = 3.5
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
@@ -61,7 +61,7 @@ x_offset = [0, 0]
 # ----------------------------
 # Main
 # ----------------------------
-(_, _, _, _, pickup_height) = lab_stuff.tubes(tube_type_source)
+#(_, _, _, _, pickup_height) = lab_stuff.tubes(tube_type_source)
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(reagent_name)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
