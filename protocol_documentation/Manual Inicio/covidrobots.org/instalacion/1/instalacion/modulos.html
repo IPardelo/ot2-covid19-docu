@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from covidrobots.org/instalacion/1/instalacion/modulos.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 May 2020 17:59:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: CovidRobots.org // Docs</title>
+    <link rel="canonical" href="modulos.html">
+    <link rel="prev" href="pipetas.html">
+    <link rel="next" href="calibracion.html">
+    <meta name="generator" content="Antora 2.3.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img width="50px" src="../../../_/img/logo.jpg">
+      <a class="navbar-item" href="https://covidrobots.org/">CovidRobots.org // Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+<!--    
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Inicio</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="../../instalacion/1/index.html">Documentos</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../../instalacion/1/index.html">Instalación</a>
+            <a class="navbar-item" href="../../../programacion/1/index.html">Programación</a>
+          </div>
+        </div>
+      </div>
+    </div>
+-->
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="instalacion" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="https://covidrobots.org/instalacion/1/introduccion/index.html">Manual de Instalación</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/introduccion/index.html">1. Introducción</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/preparacion/index.html">2. Preparación</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/preparacion/flujo.html">2.1. Flujo de trabajo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/preparacion/configuracion.html">2.2. Configuración de la instalación</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/preparacion/requisitos.html">2.3. Requisitos del laboratorio</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/preparacion/part-list.html">2.4. Material y herramientas necesarios</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">3. Puesta en marcha</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="espacio.html">3.1. Acondicionamiento del espacio</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="desembalado.html">3.2. Desembalado</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="desbloqueo.html">3.3. Desbloqueo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="pc.html">3.4. Puesta en marcha del Ordenador</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="conexion.html">3.5. Conexión del robot</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="pipetas.html">3.6. Montaje de pipetas</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="modulos.html">3.7. Montaje de módulos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="calibracion.html">3.8. Calibración del robot</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/mantenimiento/index.html">4. Mantenimiento</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/mantenimiento/calibracion.html">4.1. Calibracion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/mantenimiento/pipetas.html">4.2. Alineación de pipetas</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/mantenimiento/app.html">4.3. Como instalar la App</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/mantenimiento/wifi.html">4.4. Conexión WiFi</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/index.html">5. Anexos</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/consumo.html">5.1. Consumo de energía</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/puertos.html">5.2. Comunicaciones y puertos</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/glosario.html">5.3. Glosario</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/pildoras.html">5.4. Píldoras de formación</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/links.html">5.5. Links de interes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://covidrobots.org/instalacion/1/anexos/mejoras.html">5.6. Mejoras</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Manual de Instalación</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Manual de Instalación</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="https://covidrobots.org/instalacion/1/introduccion/index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="https://covidrobots.org/instalacion/1/introduccion/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="https://covidrobots.org/instalacion/1/introduccion/index.html">Manual de Instalación</a></li>
+    <li><a href="index.html">3. Puesta en marcha</a></li>
+    <li><a href="modulos.html">3.7. Montaje de módulos</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///media/storage/Data/Development/projects/ciber/covidrobots/manual-instalacion/modules/instalacion/pages/modulos.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_montaje_de_módulos"><a class="anchor" href="#_montaje_de_módulos"></a>Montaje de módulos.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Los módulos de temperatura y magnéticos sólo deben colocarse en las ranuras más a la izquierda (1, 4, 7, 10) o más a la derecha (3, 6, 9), con los cables orientados hacia el exterior.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Personal necesario</dt>
+<dd>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> IN. Técnico de instalación.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Herramientas/Material necesario</dt>
+<dd>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Operaciones/Pasos</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Paso</th>
+<th class="tableblock halign-left valign-top">Herramientas</th>
+<th class="tableblock halign-left valign-top">Detalle, Fotos y/o diagramas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1. Coloque el módulo en la cubierta.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El módulo encaja directamente en las ranuras de la cubierta del OT-2.</p>
+<p class="tableblock"><span class="image"><img src="_images/mag-01.jpg" alt="mag 01"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2. Conecte el módulo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El módulo requiere dos conexiones diferentes, una a la fuente de energía y otra al OT-2 para ser controlado por el robot. El conector de punta es el cable de alimentación y el USB tipo A va al puerto USB en la parte trasera del robot.</p>
+<p class="tableblock">El cable de alimentación se conecta directamente a una fuente de alimentación que se enchufa en la toma de corriente de la pared. El cable de control va a los enchufes USB en la esquina superior izquierda del OT-2</p>
+<p class="tableblock">Utiliza los soportes de cables del lado del robot para mantener el cable USB apartado.</p>
+<p class="tableblock"><span class="image"><img src="_images/mag-02.jpg" alt="mag 02"></span></p>
+<p class="tableblock"><span class="image"><img src="_images/mag-03.jpg" alt="mag 03"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3. Encender y comprobar la conexión</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Presione el pequeño botón negro para encender el módulo magnético. Deberías oír algunos pequeños ruidos de motor cuando el módulo se enciende.</p>
+<p class="tableblock">Ahora tu robot debería ser capaz de ver que tiene módulo conectado. Abre la aplicación OT y conéctate a tu robot a través de USB, Red o WiFi. Luego puedes hacer clic en la pestaña "Pipettes &amp; Modules" debajo del nombre de tu robot. Debería ver las pipetas y módulos conectados a su robot, como en la captura de pantalla.</p>
+<p class="tableblock"><span class="image"><img src="_images/mag-04.html" alt="mag 04"></span></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Escriba en este espacio las notas e incidencias del proceso</em>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="pipetas.html">3.6. Montaje de pipetas</a></span>
+  <span class="next"><a href="calibracion.html">3.8. Calibración del robot</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contenido" data-levels="3">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>(c) CovidRobots 2020</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+
+<!-- Mirrored from covidrobots.org/instalacion/1/instalacion/modulos.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 May 2020 17:59:21 GMT -->
+</html>
