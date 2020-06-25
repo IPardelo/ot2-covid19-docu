@@ -12,13 +12,18 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
 
 metadata = {
-    'protocolName': 'A1',
-    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'protocolName': 'Seroteca',
+    'author': 'Luis Lorenzo Mosquera, Victor Soñora Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
-    'description': 'Dispense samples from 96 x tube rack in 96 Well Plate'
+    'description': 'Dispense samples from 4 x 96 aliminum block to 4 x 96 x tube rack'
 }
 
 
@@ -31,34 +36,39 @@ NUM_OF_SOURCES_PER_RACK = 24
 
 
 # ------------------------
-# Pipette parameters
-# ------------------------
-air_gap_vol_sample = 5
-x_offset = [0, 0]
-pickup_height = 1
-dispense_height = -10
-
-
-# ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
-sample = {
-    'flow_rate_aspirate': 1,
-    'flow_rate_dispense': 1,
-    'vol_well': 2000
-}
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_dest = 'eppendorf'                      # Selected destination tube for this protocol
 
 
 # ------------------------
 # Protocol parameters  (OUTPUTS)
 # ------------------------
-num_samples = 96
-volume_sample = 995
+num_samples = 96                                # num of samples
+volume_sample = 995                             # final volume of sample
+
+
+# ------------------------
+# Pipette parameters
+# ------------------------
+air_gap_vol_sample = 5
+x_offset = [0, 0]
+pickup_height = 1
 
 
 # ----------------------------
 # Main
 # ----------------------------
+(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
+sample = {
+    'flow_rate_aspirate': flow_rate_aspirate,
+    'flow_rate_dispense': flow_rate_dispense,
+    'vol_well': vol_well
+}
+
+
 def run(ctx: protocol_api.ProtocolContext):
     # ------------------------
     # Load LabWare
@@ -100,7 +110,7 @@ def run(ctx: protocol_api.ProtocolContext):
         # Calculate pickup_height based on remaining volume and shape of container
         common.move_vol_multichannel(ctx, p1000, reagent=sample, source=s, dest=d,
                               vol=volume_sample, air_gap_vol=air_gap_vol_sample,
-                              pickup_height=pickup_height, disp_height=dispense_height,
+                              pickup_height=pickup_height, disp_height=hdisp,
                               x_offset=x_offset, blow_out=True, touch_tip=True)
         # Drop pipette tip
         p1000.drop_tip()

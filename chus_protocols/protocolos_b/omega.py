@@ -14,8 +14,8 @@ common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
 metadata = {
-    'protocolName': 'B0',
-    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'protocolName': 'B0: OMEGA',
+    'author': 'Luis Lorenzo Mosquera, Victor Soñora Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
     'description': 'Extracts ARN from samples for OMEGA machines'

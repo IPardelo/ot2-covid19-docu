@@ -11,10 +11,16 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
     'protocolName': 'C1',
-    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'author': 'Luis Lorenzo Mosquera, Victor Soñora Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
     'description': 'PCR preparation, mix the master mix and rna sample in pcr plate'
@@ -24,8 +30,7 @@ metadata = {
 # Protocol parameters
 # ------------------------
 NUM_SAMPLES = 96
-brand = 'seegene'
-
+brand_name = 'seegene'
 
 num_cols = math.ceil(NUM_SAMPLES / 8)
 x_offset = [0, 0]
@@ -33,26 +38,9 @@ air_gap_vol_source = 2
 diameter_sample = 8.25
 area_section_sample = (math.pi * diameter_sample**2) / 4
 
-# following volumes in ul
-brands = {
-    'seegene': {
-        'master_mix': 17,
-        'arn': 8
-    },
-    'thermofisher': {
-        'master_mix': 15,
-        'arn': 10
-    },
-    'roche': {
-        'master_mix': 10,
-        'arn': 10
-    },
-    'vircell': {
-        'master_mix': 15,
-        'arn': 5
-    }
-}
+(brand_master_mix, arn) = lab_stuff.brands(brand_name)
 
+# following volumes in ul
 master_mix = {
     'name': 'master mix',
     'flow_rate_aspirate': 1,
@@ -123,10 +111,10 @@ def run(ctx: protocol_api.ProtocolContext):
         if not p20.hw_pipette['has_tip']:
             common.pick_up(p20)
         ctx.comment(str(d))
-        source = source_master_mix[1] if i > 47 and brand == 'vircell' else source_master_mix[0]
-        common.move_vol_multichannel(p20, reagent=master_mix, source=source, dest=d,
-                                     vol=brands.get(brand).get('master_mix'), air_gap_vol=air_gap_vol_source,
-                                     x_offset=x_offset, pickup_height=1, rinse=master_mix.get('rinse'), disp_height=-10,
+        source = source_master_mix[1] if i > 47 else source_master_mix[0]
+        common.move_vol_multichannel(ctx, p20, reagent=master_mix, source=source, dest=d,
+                                     vol=brand_master_mix, air_gap_vol=air_gap_vol_source,
+                                     x_offset=x_offset, pickup_height=1, disp_height=-10,
                                      blow_out=True, touch_tip=True)
         i += 1
     p20.return_tip()
@@ -136,8 +124,8 @@ def run(ctx: protocol_api.ProtocolContext):
         if not m20.hw_pipette['has_tip']:
             common.pick_up(m20)
 
-        common.move_vol_multichannel(m20, reagent=rna_sample, source=s, dest=d,
-                                     vol=brands.get(brand).get('arn'), air_gap_vol=air_gap_vol_source,
-                                     x_offset=x_offset, pickup_height=1, rinse=rna_sample.get('rinse'), disp_height=-10,
+        common.move_vol_multichannel(ctx, m20, reagent=rna_sample, source=s, dest=d,
+                                     vol=arn, air_gap_vol=air_gap_vol_source,
+                                     x_offset=x_offset, pickup_height=1, disp_height=-10,
                                      blow_out=True, touch_tip=True)
         m20.drop_tip()

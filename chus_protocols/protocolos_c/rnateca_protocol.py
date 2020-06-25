@@ -11,10 +11,16 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
     'protocolName': 'C2',
-    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'author': 'Luis Lorenzo Mosquera, Victor Soñora Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
     'description': 'Creates RNAteca, in other words, dispense 40ul from deep-weel to 1.5ml Eppendorf tubes'
@@ -24,11 +30,15 @@ metadata = {
 # Protocol parameters
 # ------------------------
 NUM_SAMPLES = 16
+brand_name = 'vircell'
+
 x_offset = [0, 0]
 volume_source = 19      # FIXME: no deja aspirar 20?!
 air_gap_vol_source = 1
 diameter_sample = 8.25
 area_section_sample = (math.pi * diameter_sample**2) / 4
+
+(brand_master_mix, arn) = lab_stuff.brands(brand_name)
 
 sample = {
     'name': 'RNA samples',
@@ -42,6 +52,24 @@ sample = {
     'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
     'vol_well_original': 20,
     'vol_well': 20,
+    'unused': [],
+    'col': 0,
+    'vol_well': 0
+}
+
+# following volumes in ul
+master_mix = {
+    'name': 'master mix',
+    'flow_rate_aspirate': 1,
+    'flow_rate_dispense': 1,
+    'rinse': False,
+    'delay': 0,
+    'reagent_reservoir_volume': 1500,
+    'num_wells': 1,
+    'h_cono': 4,
+    'v_cono': 4 * area_section_sample * diameter_sample * 0.5 / 3,
+    'vol_well_original': 1500,
+    'vol_well': 1500,
     'unused': [],
     'col': 0,
     'vol_well': 0
@@ -83,8 +111,9 @@ def run(ctx: protocol_api.ProtocolContext):
 
         # 2 * 20ul ~> 40ul of rna sample
         for _ in range(2):
-            common.move_vol_multichannel(p20, reagent=sample, source=s, dest=d, vol=volume_source,
-                                         air_gap_vol=air_gap_vol_source, x_offset=x_offset, pickup_height=1,
-                                         rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
+            common.move_vol_multichannel(ctx, p20, reagent=master_mix, source=s, dest=d,
+                                     vol=brand_master_mix, air_gap_vol=air_gap_vol_source,
+                                     x_offset=x_offset, pickup_height=1, disp_height=-10,
+                                     blow_out=True, touch_tip=True)
         # Drop pipette tip
         p20.drop_tip()

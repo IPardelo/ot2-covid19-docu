@@ -12,10 +12,16 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
-    'protocolName': 'A0',
-    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'protocolName': 'Dispensar Buffer',
+    'author': 'Luis Lorenzo Mosquera, Victor Soñora Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
     'description': 'Dispense buffer in 96 x tuberack'
@@ -31,18 +37,18 @@ NUM_OF_SOURCES_PER_RACK = 24
 
 
 # ------------------------
-# Falcon tube physical parameters (to help calculating volume and pick-up height) (CONSTANTS)
+# Buffer specific parameters (INPUTS)
 # ------------------------
-diameter_falcon = 27
-h_cone_falcon = 17.4
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_source = 'falcon'                     # Selected tube for this protocol
 
-falcon_cross_section_area = math.pi * diameter_falcon**2 / 4
-v_cone_falcon = 1 / 3*h_cone_falcon * falcon_cross_section_area
 
-falcon_physical_description = {
-    'h_cono': (v_cone_falcon * 3 / falcon_cross_section_area),
-    'v_cono': v_cone_falcon
-}
+# ------------------------
+# Protocol parameters (OUTPUTS)
+# ------------------------
+num_destinations = 96                           # number of slots for the destination rack
+volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
+tube_type_dest = 'eppendorf'                      # Selected destination tube for this protocol
 
 
 # ------------------------
@@ -50,45 +56,27 @@ falcon_physical_description = {
 # ------------------------
 air_gap_vol_ci = 1
 x_offset = [0, 0]
-disp_height = 0.5
-
-
-# ------------------------
-# Buffer specific parameters (INPUTS)
-# ------------------------
-buffer_dict = {
-    'Lisis': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-    },
-    'Roche Cobas': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-    },
-    'UXL Longwood': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-        'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
-    },
-    'Roche Bleau': {
-        'flow_rate_aspirate': 1,                # multiplier
-        'flow_rate_dispense': 1,                # multiplier
-        'delay': 1,                             # delay after aspirate: to allow drops to fall before moving the pipette
-    },
-}
-buffer = buffer_dict['Lisis']             # selected buffer for this protocol
-buffer['vol_well'] = 20000
-
-# ------------------------
-# Protocol parameters (OUTPUTS)
-# ------------------------
-num_destinations = 96                           # number of slots for the destination rack
-volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
 
 
 # ----------------------------
 # Main
 # ----------------------------
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
+buffer = {
+    'flow_rate_aspirate': flow_rate_aspirate,
+    'flow_rate_dispense': flow_rate_dispense,
+    'delay': delay,
+    'vol_well': vol_well
+}
+(area_source, vcono_source, hcono_source, _, _) = lab_stuff.tubes(tube_type_source)
+tube_physical_description = {
+    'h_cono': hcono_source,
+    'v_cono': vcono_source
+}
+
+(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
+
+
 def run(ctx: protocol_api.ProtocolContext):
     # ------------------------
     # Load LabWare
@@ -120,11 +108,11 @@ def run(ctx: protocol_api.ProtocolContext):
 
     for destination_labware in destinations:
         # Calculate pickup_height based on remaining volume and shape of container
-        pickup_height, _ = common.calc_height(ctx, buffer, falcon_physical_description,
-                                              falcon_cross_section_area, volume_to_be_moved)
+        pickup_height, _ = common.calc_height(ctx, buffer, tube_physical_description,
+                                              area_source, volume_to_be_moved)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
                                      vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
-                                     pickup_height=pickup_height, disp_height=disp_height,
+                                     pickup_height=pickup_height, disp_height=hdisp,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
     # Drop pipette tip
     p1000.drop_tip()

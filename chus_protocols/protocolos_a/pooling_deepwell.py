@@ -12,13 +12,19 @@ spec = importlib.util.spec_from_file_location("library.protocols.common_function
 common = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(common)
 
+# Load Brands & other stuff
+spec2 = importlib.util.spec_from_file_location("library.protocols.lab_stuff",
+                                              "{}protocols/lab_stuff.py".format(LIBRARY_PATH))
+lab_stuff = importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(lab_stuff)
+
 
 metadata = {
-    'protocolName': 'A1 pooling',
-    'author': 'Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz',
+    'protocolName': 'Pooling a Deepwell',
+    'author': 'Luis Lorenzo Mosquera, Victor Soñora Pombo & Ismael Castiñeira Paz',
     'source': 'Hospital Clínico Universitario de Santiago (CHUS)',
     'apiLevel': '2.0',
-    'description': 'Dispense samples from 96 x tube rack in 96 Well Plate'
+    'description': 'Dispense samples, with pooling, from 4 x 96 x tube rack in 96 Well Plate'
 }
 
 
@@ -31,35 +37,40 @@ NUM_OF_SOURCES_PER_RACK = 24
 
 
 # ------------------------
-# Pipette parameters
-# ------------------------
-air_gap_vol_sample = 5
-x_offset = [0, 0]
-pickup_height = 1.5
-dispense_height = -10
-
-
-# ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
-sample = {
-    'flow_rate_aspirate': 1,
-    'flow_rate_dispense': 1,
-    'vol_well': 35
-}
+reagent_name = 'Sample'                           # Selected buffer for this protocol
+tube_type_source = 'eppendorf'                  # Selected destination tube for this protocol
 
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
 # ------------------------
-pooling_factor = 5
-num_samples = 95
-volume_sample_to_be_transfered = 300
+num_samples = 95                      # total number of destinations
+volume_to_be_transfered = 1000        # volume in uL to be moved from 1 source to 1 destination
+pooling_factor = 5                    # num of destinations per source
+
+
+# ------------------------
+# Pipette parameters
+# ------------------------
+air_gap_vol_sample = 5
+x_offset = [0, 0]
+dispense_height = -10
 
 
 # ----------------------------
 # Main
 # ----------------------------
+(_, _, _, _, hpick) = lab_stuff.tubes(tube_type_source)
+(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(reagent_name)
+sample = {
+    'flow_rate_aspirate': flow_rate_aspirate,
+    'flow_rate_dispense': flow_rate_dispense,
+    'vol_well': vol_well
+}
+
+
 def run(ctx: protocol_api.ProtocolContext):
     # ------------------------
     # Load LabWare
@@ -98,8 +109,8 @@ def run(ctx: protocol_api.ProtocolContext):
 
             # Calculate pickup_height based on remaining volume and shape of container
             common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest,
-                                         vol=volume_sample_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample,
-                                         pickup_height=pickup_height, disp_height=dispense_height,
+                                         vol=volume_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample,
+                                         pickup_height=hpick, disp_height=dispense_height,
                                          x_offset=x_offset, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()
