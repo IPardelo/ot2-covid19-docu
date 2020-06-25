@@ -74,7 +74,7 @@ tube_physical_description = {
     'v_cono': vcono_source
 }
 
-(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
+(_, _, _, dispense_height, _) = lab_stuff.tubes(tube_type_dest)
 
 
 def run(ctx: protocol_api.ProtocolContext):
@@ -112,7 +112,7 @@ def run(ctx: protocol_api.ProtocolContext):
                                               area_source, volume_to_be_moved)
         common.move_vol_multichannel(ctx, p1000, reagent=buffer, source=source_labware, dest=destination_labware,
                                      vol=volume_to_be_moved, air_gap_vol=air_gap_vol_ci,
-                                     pickup_height=pickup_height, disp_height=hdisp,
+                                     pickup_height=pickup_height, disp_height=dispense_height,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
     # Drop pipette tip
     p1000.drop_tip()
