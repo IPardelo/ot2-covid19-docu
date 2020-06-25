@@ -40,7 +40,7 @@ NUM_OF_SOURCES_PER_RACK = 24
 # ------------------------
 reagent_name = 'Sample'                    # Selected buffer for this protocol
 num_samples = 96                           # total number of samples
-tube_type_source = 'eppendorf'             # Selected source tube for this protocol
+tube_type_source = 'criotubo'             # Selected source tube for this protocol
 
 
 # ------------------------

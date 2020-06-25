@@ -40,7 +40,7 @@ NUM_OF_SOURCES_PER_RACK = 24
 # Sample specific parameters (INPUTS)
 # ------------------------
 reagent_name = 'Sample'                           # Selected buffer for this protocol
-tube_type_source = 'eppendorf'                  # Selected destination tube for this protocol
+tube_type_source = 'criotubo'                  # Selected destination tube for this protocol
 pickup_height = 3.5
 
 # ------------------------
@@ -49,7 +49,7 @@ pickup_height = 3.5
 num_samples = 90                      # total number of destinations
 volume_to_be_transfered = 1000        # volume in uL to be moved from 1 source to 1 destination
 pooling_factor = 10                   # num of destinations per source
-tube_type_dest = 'eppendorf'
+tube_type_dest = 'criotubo'
 dispense_height = -10
 
 # ------------------------
