@@ -132,9 +132,10 @@ def run(ctx: protocol_api.ProtocolContext):
                 common.pick_up(p300)
 
             # Calculate pickup_height based on remaining volume and shape of container
-            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, vol=volume_to_be_transfered / pooling_factor,
-                                         air_gap_vol=air_gap_vol_sample, x_offset=x_offset, pickup_height=6.5,
-                                         rinse=sample.get('rinse'), disp_height=-10, blow_out=True, touch_tip=True)
+            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, 
+                                         vol=volume_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample, 
+                                          pickup_height=3.5, disp_height=-10,
+                                          x_offset=x_offset, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()
 
