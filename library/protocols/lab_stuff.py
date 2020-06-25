@@ -41,7 +41,7 @@ def tubes(tube_tipe):
         'criotubo': {
             'diameter': 8,
             'hdisp': 0.5,
-            'hpick': 2,
+            'hpick': 3.5,
             'hcono': 2
         },
         'f_redondo': {

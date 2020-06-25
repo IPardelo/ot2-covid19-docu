@@ -41,7 +41,6 @@ NUM_OF_SOURCES_PER_RACK = 24
 # ------------------------
 reagent_name = 'Sample'                           # Selected buffer for this protocol
 tube_type_source = 'criotubo'                  # Selected destination tube for this protocol
-pickup_height = 3.5
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
@@ -50,7 +49,6 @@ num_samples = 90                      # total number of destinations
 volume_to_be_transfered = 1000        # volume in uL to be moved from 1 source to 1 destination
 pooling_factor = 10                   # num of destinations per source
 tube_type_dest = 'criotubo'
-dispense_height = -10
 
 # ------------------------
 # Pipette parameters
@@ -82,8 +80,8 @@ def split_list(l: list, n: int):
 # Main
 # ----------------------------
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(reagent_name)
-(_, _, _, _, hpick) = lab_stuff.tubes(tube_type_source)
-(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
+(_, _, _, _, pickup_height) = lab_stuff.tubes(tube_type_source)
+(_, _, _, dispense_height, _) = lab_stuff.tubes(tube_type_dest)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
     'flow_rate_dispense': flow_rate_dispense,
@@ -133,10 +131,10 @@ def run(ctx: protocol_api.ProtocolContext):
                 common.pick_up(p300)
 
             # Calculate pickup_height based on remaining volume and shape of container
-            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, 
-                                         vol=volume_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample, 
-                                          pickup_height=pickup_height, dispense_height=-10,
-                                          x_offset=x_offset, blow_out=True, touch_tip=True)
+            common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest,
+                                         vol=volume_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample,
+                                         pickup_height=pickup_height, disp_height=dispense_height,
+                                         x_offset=x_offset, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()
 
