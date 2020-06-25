@@ -35,7 +35,7 @@
 
 1. `ssh -i ot2_ssh_key root@`**IP_ROBOT**
 2. `mkdir -p /root/ot2-covid19/library/protocols`
-3. `scp -i ot2_ssh_key home/laboratorio/Repositorios/ot2-covid19/library/protocols/common_functions.py root@`**IP_ROBOT**`:/root/ot2-covid19/library/protocols`
+3. `scp -i ot2_ssh_key Repositorios/ot2-covid19/library/protocols/common_functions.py root@`**IP_ROBOT**`:/root/ot2-covid19/library/protocols`
 
 
 # Otros
