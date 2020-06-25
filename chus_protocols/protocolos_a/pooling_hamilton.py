@@ -41,7 +41,7 @@ NUM_OF_SOURCES_PER_RACK = 24
 # ------------------------
 reagent_name = 'Sample'                           # Selected buffer for this protocol
 tube_type_source = 'eppendorf'                  # Selected destination tube for this protocol
-
+pickup_height = 3.5
 
 # ------------------------
 # Protocol parameters (OUTPUTS)
@@ -49,14 +49,14 @@ tube_type_source = 'eppendorf'                  # Selected destination tube for 
 num_samples = 90                      # total number of destinations
 volume_to_be_transfered = 1000        # volume in uL to be moved from 1 source to 1 destination
 pooling_factor = 10                   # num of destinations per source
-
+tube_type_dest = 'eppendorf'
+dispense_height = -10
 
 # ------------------------
 # Pipette parameters
 # ------------------------
 air_gap_vol_sample = 1
 x_offset = [0, 0]
-dispense_height = -10
 
 
 # ----------------------------
@@ -83,6 +83,7 @@ def split_list(l: list, n: int):
 # ----------------------------
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(reagent_name)
 (_, _, _, _, hpick) = lab_stuff.tubes(tube_type_source)
+(_, _, _, hdisp, _) = lab_stuff.tubes(tube_type_dest)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
     'flow_rate_dispense': flow_rate_dispense,
@@ -134,7 +135,7 @@ def run(ctx: protocol_api.ProtocolContext):
             # Calculate pickup_height based on remaining volume and shape of container
             common.move_vol_multichannel(ctx, p300, reagent=sample, source=source, dest=dest, 
                                          vol=volume_to_be_transfered / pooling_factor, air_gap_vol=air_gap_vol_sample, 
-                                          pickup_height=3.5, disp_height=-10,
+                                          pickup_height=pickup_height, dispense_height=-10,
                                           x_offset=x_offset, blow_out=True, touch_tip=True)
             # Drop pipette tip
             p300.drop_tip()

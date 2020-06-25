@@ -48,6 +48,7 @@ tube_type_source = 'eppendorf'             # Selected source tube for this proto
 # ------------------------
 num_destinations = 96                      # total number of destinations
 volume_to_be_transfered = 200              # volume in uL to be moved from 1 source to 1 destination
+dispense_height = -10
 
 
 # ------------------------
@@ -55,14 +56,13 @@ volume_to_be_transfered = 200              # volume in uL to be moved from 1 sou
 # ------------------------
 air_gap_vol_sample = 5
 x_offset = [0, 0]
-dispense_height = -10
 
 
 # ----------------------------
 # Main
 # ----------------------------
 (flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(reagent_name)
-(_, _, _, _, hpick) = lab_stuff.tubes(tube_type_source)
+(_, _, _, _, pickup_height) = lab_stuff.tubes(tube_type_source)
 sample = {
     'flow_rate_aspirate': flow_rate_aspirate,
     'flow_rate_dispense': flow_rate_dispense,
@@ -106,7 +106,7 @@ def run(ctx: protocol_api.ProtocolContext):
         # Calculate pickup_height based on remaining volume and shape of container
         common.move_vol_multichannel(ctx, p1000, reagent=sample, source=s, dest=d,
                                      vol=volume_to_be_transfered, air_gap_vol=air_gap_vol_sample,
-                                     pickup_height=hpick, disp_height=dispense_height,
+                                     pickup_height=pickup_height, disp_height=dispense_height,
                                      x_offset=x_offset, blow_out=True, touch_tip=True)
         # Drop pipette tip
         p1000.drop_tip()
