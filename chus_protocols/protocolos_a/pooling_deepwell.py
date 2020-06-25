@@ -62,12 +62,8 @@ x_offset = [0, 0]
 # Main
 # ----------------------------
 (_, _, _, _, pickup_height) = lab_stuff.tubes(tube_type_source)
-(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(reagent_name)
-sample = {
-    'flow_rate_aspirate': flow_rate_aspirate,
-    'flow_rate_dispense': flow_rate_dispense,
-    'vol_well': vol_well
-}
+(sample) = lab_stuff.buffer(reagent_name)
+
 
 
 def run(ctx: protocol_api.ProtocolContext):
