@@ -30,7 +30,7 @@ def tubes(tube_tipe):
     tubes = {
         'falcon': {
             'diameter': 28,
-            'hcono': 14 #17.4
+            'hcono': 14         #previously it was: 17.4
         },
         'eppendorf': {
             'diameter': 9,
@@ -99,8 +99,11 @@ def buffer(buffer_name):
             'vol_well': 30000
         },
     }
-    flow_rate_aspirate = buffer.get(buffer_name).get('flow_rate_aspirate')
-    flow_rate_dispense = buffer.get(buffer_name).get('flow_rate_dispense')
-    delay = buffer.get(buffer_name).get('delay')
-    vol_well = buffer.get(buffer_name).get('vol_well')
-    return flow_rate_aspirate, flow_rate_dispense, delay, vol_well
+    buffer = {
+        'flow_rate_aspirate': buffer.get(buffer_name).get('flow_rate_aspirate'),
+        'flow_rate_dispense': buffer.get(buffer_name).get('flow_rate_dispense'),
+        'delay': buffer.get(buffer_name).get('delay'),
+        'vol_well': buffer.get(buffer_name).get('vol_well')
+
+    }
+    return buffer

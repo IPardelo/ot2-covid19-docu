@@ -39,7 +39,7 @@ NUM_OF_SOURCES_PER_RACK = 24
 # Sample specific parameters (INPUTS)
 # ------------------------
 buffer_name = 'Lisis'                           # Selected buffer for this protocol
-tube_type_source = 'eppendorf'                      # Selected destination tube for this protocol
+tube_type_source = 'criotubo'                      # Selected destination tube for this protocol
 
 
 # ------------------------
@@ -47,8 +47,7 @@ tube_type_source = 'eppendorf'                      # Selected destination tube 
 # ------------------------
 num_samples = 96                                # num of samples
 volume_sample = 995                             # final volume of sample
-tube_type_dest = 'eppendorf'                      # Selected destination tube for this protocol
-
+tube_type_dest = 'criotubo'                      # Selected destination tube for this protocol
 
 
 # ------------------------
@@ -63,12 +62,7 @@ x_offset = [0, 0]
 # ----------------------------
 (_, _, _, _, pickup_height) = lab_stuff.tubes(tube_type_source)
 (_, _, _, dispense_height, _) = lab_stuff.tubes(tube_type_dest)
-(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
-sample = {
-    'flow_rate_aspirate': flow_rate_aspirate,
-    'flow_rate_dispense': flow_rate_dispense,
-    'vol_well': vol_well
-}
+(sample) = lab_stuff.buffer(buffer_name)
 
 
 def run(ctx: protocol_api.ProtocolContext):
