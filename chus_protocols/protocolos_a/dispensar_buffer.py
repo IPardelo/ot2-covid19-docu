@@ -61,21 +61,13 @@ x_offset = [0, 0]
 # ----------------------------
 # Main
 # ----------------------------
-(flow_rate_aspirate, flow_rate_dispense, delay, vol_well) = lab_stuff.buffer(buffer_name)
-buffer = {
-    'flow_rate_aspirate': flow_rate_aspirate,
-    'flow_rate_dispense': flow_rate_dispense,
-    'delay': delay,
-    'vol_well': vol_well
-}
+(buffer) = lab_stuff.buffer(buffer_name)
 (area_source, vcono_source, hcono_source, _, _) = lab_stuff.tubes(tube_type_source)
+(_, _, _, dispense_height, _) = lab_stuff.tubes(tube_type_dest)
 tube_physical_description = {
     'h_cono': hcono_source,
     'v_cono': vcono_source
 }
-
-(_, _, _, dispense_height, _) = lab_stuff.tubes(tube_type_dest)
-
 
 def run(ctx: protocol_api.ProtocolContext):
     # ------------------------
