@@ -25,27 +25,29 @@
 
 # Protocolo A
 
-## Paso 1: A0
+## Paso 1: Dispensar Buffer
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de 300µl de *buffer* del recipiente llamado [**FALCON**](labware.md/#falcon) y las distribuímos por todos los pocillos de los [racks de 24](labware.md/#rack24).  
 
 ![a0](img/protocol_example/a0.gif)
 
-## Paso 2-1: A1 (SAR1)
+## Paso 2-1: Dispensar muestras en deepwell
 
 Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24](labware.md/#rack24) y se coloca en la coordenada correspondiente en el [deepwell  de 96](labware.md/#deepwell2ml). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
 
 ![a1](img/protocol_example/a1-1.gif)
 
-## Paso 2-2: A1 (SAR2)
+## Paso 2-2: Pooling Deepwell, Pooling Hamilton
 
 Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
 Con la pipeta [P300](labware.md/#puntas300) cojemos cantidades de XXXml de cada pocillo del [rack de 24](labware.md/#rack24) y se deposita **N** veces en un pocillo en concreto.
+
+La única diferencia entre las dos variantes es que en **pooling deepwell** el destino sería un *deepwell* y en **pooling hamilton** sería un rack de tubos.
 > Ej: Los 5 primeros pocillos del *rack de 24* van al *deepwell* A1, los 5 siguientes al B1, etc.  
 
 ![a1](img/protocol_example/a1-2.gif)
 
-## Paso 3: A2
+## Paso 3: Seroteca
 
 Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en su correspondiente coordenada del [rack de 24](labware.md/#rack24). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
 
