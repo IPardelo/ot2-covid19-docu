@@ -50,7 +50,6 @@ volume_sample = 995                             # final volume of sample
 tube_type_dest = 'criotubo'                      # Selected destination tube for this protocol
 
 
-
 # ------------------------
 # Pipette parameters
 # ------------------------
