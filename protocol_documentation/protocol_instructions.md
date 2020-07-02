@@ -29,7 +29,7 @@ El robot hará una simulación al cargar el archivo y si todo sale bien, estará
 
 # Protocolo A
 
-## Protocolo A0
+## Protocolo **Dispensar buffer**
 ```py
 # ------------------------
 # Buffer specific parameters (INPUTS)
@@ -55,7 +55,7 @@ tube_type_dest = 'ependor'                      # Selected destination tube for 
 **3er parámetro:** tipo de tubo a usar como destino.
 
 
-## Protocolo A1 (SAR1)
+## Protocolo **Dispensar muestras deepwell**
 
 ```py
 # ------------------------
@@ -82,7 +82,7 @@ volume_to_be_transfered = 300              # volume in uL to be moved from 1 sou
 **2º parámetro:** cantidad en µL a dispensar.
 
 
-## Protocolo A1 (SAR2)
+## Protocolo **Pooling Deepwell, Pooling Hamilton**
 
 ```py
 # ------------------------
@@ -109,7 +109,7 @@ pooling_factor = 5                    # num of destinations per source
 **P. ej:** Si *pooling_factor* es igual a 4 -> `las coordenadas A1, B1, C1, D1 del rack, van al A1 del deepwell`
 
 
-## Protocolo A2
+## Protocolo **Seroteca**
 
 ```py
 # ------------------------
@@ -126,8 +126,8 @@ tube_type_dest = 'ependor'                      # Selected destination tube for 
 # ------------------------
 # Protocol parameters  (OUTPUTS)
 # ------------------------
-num_samples = 96
-volume_sample = 995
+num_samples = 96                      # total number of destinations
+volume_sample = 995                   #
 ```
 
 >
@@ -141,9 +141,19 @@ TODO
 
 # Protocolo C
 
+## Protocolos **PCR Full Setup** - **PCR Setup** - **RNA-Teca**
+
+```py
+# ------------------------
+# Protocol parameters (OUTPUTS)
+# ------------------------
+NUM_SAMPLES = 16                            # total number of destinations
+brand_name = 'vircell'                      # commercial brand name
 ```
-TODO
-```
+
+> **1er parámetro:** establece el número de destinos.  
+**2º parámetro:** nombre de la marca comercial.
+
 
 # Otros
 
