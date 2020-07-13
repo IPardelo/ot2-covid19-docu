@@ -1,17 +1,17 @@
 # Instalación y errores
-> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz 
+> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz  
 <pre>
       @@@@@    @@@@@
     @@@@          @@@@
    @@@      @@      @@@    @@@@@@   @@@@@
-  @@@      @@@@      @@@   @@@@@@  &amp;@&apos; &apos;@@
-  @@     @@@@@@@@    &amp;@@     @@         @@
-  @@    .@@@    @    #@@     @@        @@
+  @@@      @@@@      @@@   @@@@@@  @@@ @@@
+  @@     @@@@@@@@    @@@     @@         @@
+  @@    @@@    @@    @@@     @@        @@
   @@@    @      @    @@@     @@       @@
-   @@@    @@..@@    @@@      @@      @@
-    @@@@          @@@@       @@     @@@@@&amp;
-      @@@@@@@@@@@@@@         ##    &amp;@@@@@#
-         (@@@@@@.
+   @@@    @@@@@@    @@@      @@      @@
+    @@@@          @@@@       @@     @@@@@@
+      @@@@@@@@@@@@@@         @@    @@@@@@#
+         @@@@@@@@
 </pre>
 
 # Instalación

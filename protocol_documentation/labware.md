@@ -1,17 +1,17 @@
 # Documentación labware
-> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz 
+> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz  
 <pre>
       @@@@@    @@@@@
     @@@@          @@@@
    @@@      @@      @@@    @@@@@@   @@@@@
-  @@@      @@@@      @@@   @@@@@@  &amp;@&apos; &apos;@@
-  @@     @@@@@@@@    &amp;@@     @@         @@
-  @@    .@@@    @    #@@     @@        @@
+  @@@      @@@@      @@@   @@@@@@  @@@ @@@
+  @@     @@@@@@@@    @@@     @@         @@
+  @@    @@@    @@    @@@     @@        @@
   @@@    @      @    @@@     @@       @@
-   @@@    @@..@@    @@@      @@      @@
-    @@@@          @@@@       @@     @@@@@&amp;
-      @@@@@@@@@@@@@@         ##    &amp;@@@@@#
-         (@@@@@@.
+   @@@    @@@@@@    @@@      @@      @@
+    @@@@          @@@@       @@     @@@@@@
+      @@@@@@@@@@@@@@         @@    @@@@@@#
+         @@@@@@@@
 </pre>
 
 # Tubos
@@ -26,7 +26,6 @@
 * Nomenclatura no técnica: ???
 * Uso: muestras
 
-
 <a id="criotubo"></a>  
 
 ## Criotubo  
@@ -37,7 +36,6 @@
 * Nomenclatura no técnica: "de 2ml", de congelación
 * Uso: muestras
 
-
 <a id="f_redondo"></a>  
 
 ## Tubo fondo redondo  
@@ -47,7 +45,6 @@
 * Capacidad: 3ml
 * Nomenclatura no técnica: "de 13x75"
 * Uso: muestras
-
 
 <a id="falcon50"></a>  
 
@@ -81,16 +78,15 @@
 * Compatibles: Socorex®, Calibra/Acura®, VWR®, Matrix®, Nichiryo/Oxford®, Rainin®, Biohit®, Capp Aero®, Eppendorf®, Thermo®, Gilson®
 * Load labware: *opentrons_96_filtertiprack_1000ul*
 
-
 <a id="puntas300"></a>  
 
 ## Puntas para pipeta p300  
 
-![puntas300](img/labware/puntas300.jpeg)
-* Capacidad: de 100µl a 200µl
+![puntas300](img/labware/puntas300.jpeg)  
+
+* Capacidad: de 100µl a 200µl  
 * Compatibles: Socorex®, Calibra/Acura®, VWR®, Matrix®, Nichiryo/Oxford®, Rainin®, Biohit®, Capp Aero®, Eppendorf®, Thermo®, Gilson®
 * Load labware: *opentrons_96_filtertiprack_300ul*
-
 
 <a id="puntas20"></a>  
 
@@ -102,7 +98,6 @@
 * Compatibles: Socorex®, Calibra/Acura®, VWR®, Matrix®, Nichiryo/Oxford®, Rainin®, Biohit®, Capp Aero®, Eppendorf®, Thermo®, Gilson®
 * Load labware: *opentrons_96_filtertiprack_20ul*
 
-
 # Deepwells
 
 <a id="deepwell195ml"></a>
@@ -111,20 +106,17 @@
 
 ![deepwell195ml](img/labware/deepwell195ml.jpeg)
 
-
 <a id="deepwell15ml"></a>  
 
 ## Deepwell 15ml  
 
 ![deepwell15ml](img/labware/deepwell15ml.jpeg)
 
-
 <a id="deepwell2ml"></a>  
 
 ## Deepwell 2ml  
 
 ![deepwell2ml](img/labware/deepwell2ml.jpeg)
-
 
 <a id="pcrplate"></a>
 
@@ -143,7 +135,6 @@
 * Capacidad: 1 [pcr plate](#pcrplate)  
 * Load labware: *abi_fast_qpcr_96_alum_opentrons_100ul*  
 
-
 <a id="rack24"></a>
 
 ## Rack 24  
@@ -153,7 +144,6 @@
 * Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos eppendorf](#eppendorf) o [criotubos](#criotubo).
 * Load labware: *opentrons_24_tuberack_generic_2ml_screwcap*
 
-
 <a id="rack24_alum"></a>
 
 ## Rack 24 (Aluminio)  
@@ -162,7 +152,6 @@
 
 * Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos eppendorf](#eppendorf) o [criotubos](#criotubo).
 * Load labware: *opentrons_24_aluminumblock_generic_2ml_screwcap*
-
 
 <a id="rack15"></a>
 
@@ -182,7 +171,6 @@
 * Capacidad: 4 [tubos falcon 50ml](#falcon50) y 6 [tubos falcon 15ml](#falcon15).
 * Load labware: *opentrons_10_tuberack_nest_4x50ml_6x15ml_conical*
 
-
 <a id="rack6"></a>
 
 ## Rack 6  
@@ -191,7 +179,6 @@
 
 * Capacidad: 6 [tubos falcon 50ml](#falcon50).
 * Load labware: *opentrons_6_tuberack_falcon_50ml_conical*
-
 
 # Módulos
 
@@ -202,7 +189,6 @@
 ![mag_module](img/labware/mag_module.jpg)  
 
 * Load labware: *magnetic module*
-
 
 <a id="m_temperatura"></a>
 

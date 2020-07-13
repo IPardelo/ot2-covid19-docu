@@ -1,17 +1,17 @@
 # Instrucciones para ejecutar los protocolos y manejo del programa
-> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz 
+> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz  
 <pre>
       @@@@@    @@@@@
     @@@@          @@@@
    @@@      @@      @@@    @@@@@@   @@@@@
-  @@@      @@@@      @@@   @@@@@@  &amp;@&apos; &apos;@@
-  @@     @@@@@@@@    &amp;@@     @@         @@
-  @@    .@@@    @    #@@     @@        @@
+  @@@      @@@@      @@@   @@@@@@  @@@ @@@
+  @@     @@@@@@@@    @@@     @@         @@
+  @@    @@@    @@    @@@     @@        @@
   @@@    @      @    @@@     @@       @@
-   @@@    @@..@@    @@@      @@      @@
-    @@@@          @@@@       @@     @@@@@&amp;
-      @@@@@@@@@@@@@@         ##    &amp;@@@@@#
-         (@@@@@@.
+   @@@    @@@@@@    @@@      @@      @@
+    @@@@          @@@@       @@     @@@@@@
+      @@@@@@@@@@@@@@         @@    @@@@@@#
+         @@@@@@@@
 </pre>
 
 :warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. Para saber más consulta [los protocolos](chus_protocols.md) :warning:

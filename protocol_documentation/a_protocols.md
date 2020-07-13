@@ -1,27 +1,26 @@
 # Instrucciones para ejecutar los protocolos A
-> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz 
+> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz  
 <pre>
       @@@@@    @@@@@
     @@@@          @@@@
    @@@      @@      @@@    @@@@@@   @@@@@
-  @@@      @@@@      @@@   @@@@@@  &amp;@&apos; &apos;@@
-  @@     @@@@@@@@    &amp;@@     @@         @@
-  @@    .@@@    @    #@@     @@        @@
+  @@@      @@@@      @@@   @@@@@@  @@@ @@@
+  @@     @@@@@@@@    @@@     @@         @@
+  @@    @@@    @@    @@@     @@        @@
   @@@    @      @    @@@     @@       @@
-   @@@    @@..@@    @@@      @@      @@
-    @@@@          @@@@       @@     @@@@@&amp;
-      @@@@@@@@@@@@@@         ##    &amp;@@@@@#
-         (@@@@@@.
+   @@@    @@@@@@    @@@      @@      @@
+    @@@@          @@@@       @@     @@@@@@
+      @@@@@@@@@@@@@@         @@    @@@@@@#
+         @@@@@@@@
 </pre>
 
-:warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. :warning:
+:warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. Pincha en el título de cada protocolo para ver que labware necesita :warning:
 
+## Protocolo [**Dispensar buffer**](img/labware_schema/protocol_a_dispensarbuffer.jpg)
 
-# Parámetros
+Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de X µl de *buffer* del recipiente llamado [**FALCON**](labware.md/#falcon) y las distribuímos por todos los pocillos de los [racks de 24](labware.md/#rack24).  
 
-## Protocolo **Dispensar buffer**
-
-Este protocolo dispensa buffer de un tubo [falcon de 50ml](/labware.md/#falcon50) a varios tubos en un [rack de 24](labware.md/#rack24).
+![a0](img/protocol_example/a0.gif)
 
 ```py
 # ------------------------
@@ -47,10 +46,12 @@ tube_type_dest = 'eppendorf'                    # Selected destination tube for 
 **2º parámetro:** cantidad en µL a dispensar de buffer en los tubos.  
 **3er parámetro:** tipo de tubo a usar como destino. ***Ej: eppendorf, criotubo***
 
+## Protocolo [**Dispensar muestras deepwell**](img/labware_schema/protocol_a_dispensardeepwell.jpg)
 
-## Protocolo **Dispensar muestras deepwell**
+Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
+Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de X ml de cada pocillo del [rack de 24](labware.md/#rack24) y se coloca en la coordenada correspondiente en el [deepwell  de 96](labware.md/#deepwell2ml). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
 
-Este protocolo recoge los líquidos de los tubos del [rack de 24](labware.md/#rack24) y los dispensa en una [deepwell](labware.md/#deepwell2ml).
+![a1](img/protocol_example/a1.gif)
 
 ```py
 # ------------------------
@@ -76,10 +77,15 @@ volume_to_be_transfered = 300              # volume in uL to be moved from 1 sou
 > **1er parámetro:** este parámetro debe llevar el mismo número que el anterior llamado ***num_samples*** ya que es el número de destinos en la [deepwell](labware.md/#deepwell2ml).  
 **2º parámetro:** cantidad en µL a dispensar en cada pocillo de la [deepwell](labware.md/#deepwell2ml).
 
+## Protocolo [**Pooling Deepwell**](img/labware_schema/protocol_a_poolingdeepwell.jpg) & [**Pooling Hamilton**](img/labware_schema/protocol_a_poolinghamilton.jpg)  
 
-## Protocolo **Pooling Deepwell, Pooling Hamilton**
+Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
+Con la pipeta [P300](labware.md/#puntas300) cojemos cantidades de X ml de cada pocillo del [rack de 24](labware.md/#rack24) y se deposita **N** veces en un pocillo en concreto.
 
-Este protocolo hace pooling del [rack de 24](labware.md/#rack24) a una [deepwell](labware.md/#deepwell2ml) o a otro [rack de 24](labware.md/#rack24) si va a ir al "*Hamilton*".
+La única diferencia entre las dos variantes es que en **pooling deepwell** el destino sería un *deepwell* y en **pooling hamilton** sería un rack de tubos.
+> Ej: Los 5 primeros pocillos del *rack de 24* van al *deepwell* A1, los 5 siguientes al B1, etc.  
+
+![a1](img/protocol_example/a2.gif)
 
 ```py
 # ------------------------
@@ -106,10 +112,11 @@ pooling_factor = 5                    # num of destinations per source
 **3er parámetro:** número de origenes para un destino.  
 **P. ej:** Si *pooling_factor* es igual a 4 -> `las coordenadas A1, B1, C1, D1 del rack, van al A1 del deepwell`
 
+## Protocolo [**Seroteca**](img/labware_schema/protocol_a_seroteca.jpg)
 
-## Protocolo **Seroteca**
+Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de X ml de cada pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en su correspondiente coordenada del [rack de 24](labware.md/#rack24). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
 
-En este protocolo se mueve el contenido de los tubos del [rack de 24](labware.md/#rack24) a los tubos del [rack de aluminio](labware.md/#rack24_alum)
+![a2](img/protocol_example/a3.gif)
 
 ```py
 # ------------------------
@@ -132,33 +139,3 @@ volume_sample = 995                   # volume in uL to be moved
 
 > **1er parámetro:** número de tubos a usar.  
 **2º parámetro:** volumen de liquido a mover en μl.
-
-# Paso a paso con imágenes
-
-## **Dispensar buffer**
-Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de 300µl de *buffer* del recipiente llamado [**FALCON**](labware.md/#falcon) y las distribuímos por todos los pocillos de los [racks de 24](labware.md/#rack24).  
-
-![a0](img/protocol_example/a0.gif)
-
-## **Dispensar muestras deepwell**
-
-Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
-Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24](labware.md/#rack24) y se coloca en la coordenada correspondiente en el [deepwell  de 96](labware.md/#deepwell2ml). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
-
-![a1](img/protocol_example/a1-1.gif)
-
-## **Pooling Deepwell** & **Pooling Hamilton**
-
-Luego del paso anterior, las muestras inactivadas son introducidas en el robot manualmente.
-Con la pipeta [P300](labware.md/#puntas300) cojemos cantidades de XXXml de cada pocillo del [rack de 24](labware.md/#rack24) y se deposita **N** veces en un pocillo en concreto.
-
-La única diferencia entre las dos variantes es que en **pooling deepwell** el destino sería un *deepwell* y en **pooling hamilton** sería un rack de tubos.
-> Ej: Los 5 primeros pocillos del *rack de 24* van al *deepwell* A1, los 5 siguientes al B1, etc.  
-
-![a1](img/protocol_example/a1-2.gif)
-
-## **Seroteca**
-
-Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de XXXml de cada pocillo del [rack de 24 de aluminio](labware.md/#rack24_alum) y lo depositamos en su correspondiente coordenada del [rack de 24](labware.md/#rack24). De cada instrucción se coje una punta, se lleva a cabo la acción y se tira.  
-
-![a2](img/protocol_example/a2.gif)
