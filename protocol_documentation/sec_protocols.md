@@ -14,7 +14,7 @@
          @@@@@@@@
 </pre>
 
-:warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. :warning:
+:warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. Pincha en el título de cada protocolo para ver que labware necesita :warning:  
 
 ```
 TODO

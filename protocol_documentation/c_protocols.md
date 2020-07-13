@@ -16,7 +16,7 @@
 
 :warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. Pincha en el título de cada protocolo para ver que labware necesita :warning:
 
-## Protocolos **PCR Full Setup** - **PCR Setup** - **RNA-Teca**
+## Protocolos [**PCR Full Setup**](img/labware_schema/protocol_c_pcrfullsetup.jpg) - [**PCR Setup**](img/labware_schema/protocol_c_pcrsetup.jpg) - [**RNA-Teca**](img/labware_schema/protocol_c_rnateca.jpg)
 
 ```py
 # ------------------------
