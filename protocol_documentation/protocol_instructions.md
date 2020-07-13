@@ -1,8 +1,8 @@
 # Instrucciones para ejecutar los protocolos y manejo del programa
 > por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz 
 <pre>
-      @@@@@    @@@@@                                                                               
-    @@@@          @@@@                                                         
+      @@@@@    @@@@@
+    @@@@          @@@@
    @@@      @@      @@@    @@@@@@   @@@@@
   @@@      @@@@      @@@   @@@@@@  &amp;@&apos; &apos;@@
   @@     @@@@@@@@    &amp;@@     @@         @@
@@ -16,8 +16,14 @@
 
 :warning: **IMPORTANTÍSIMO:** ANTES DE CARGAR NINGÚN PROTOCOLO ES IMPORTANTE TENER EL LABWARE COLOCADO EN SU CORRESPONDIENTE LUGAR. Para saber más consulta [los protocolos](chus_protocols.md) :warning:
 
+| Protocolo | Pipeta Izquierda | Pipeta Derecha |
+| -- | -- | -- | -- |
+| [A](#protocolo-a) | [P300 Single](labware.md/#puntas300) | [P1000 Single](labware.md/#puntas1000) |
+| [B](#protocolo-b) | [P300 Multi](labware.md/#puntas300) | --- |
+| [C](#protocolo-c) | [P20 Multi](labware.md/#puntas20) | [P20 Single](labware.md/#puntas20) |
+| [SEC](#protocolo-sec) | [P20 Multi](labware.md/#puntas20) | [P20 Single](labware.md/#puntas20) |
 
-# Cómo cargar un protocolo
+## Cómo cargar un protocolo
 Una vez [conectado a un robot](#conexion) nos dirigimos a la pestaña *PROTOCOL* y seleccionamos, luego de pulsar el boton *OPEN*, el archivo.
 
 El robot hará una simulación al cargar el archivo y si todo sale bien, estará todo listo para poder iniciar el protocolo. Con la simulación terminada, vamos a pa pestaña *RUN* y pulsamos *START RUN*.  
@@ -26,136 +32,6 @@ El robot hará una simulación al cargar el archivo y si todo sale bien, estará
 
 ![cargar_protocolo](img/protocol_instructions/cargar_protocolo.gif)
 
-
-# Protocolo A
-
-## Protocolo **Dispensar buffer**
-```py
-# ------------------------
-# Buffer specific parameters (INPUTS)
-# ------------------------
-buffer_name = 'Lisis'                           # Selected buffer for this protocol
-tube_type_source = 'falcon'                     # Selected tube for this protocol
-```
-
-> **1er parámetro:** establece el buffer a utilizar.  
-**2º parámetro:** tipo de tubo de origen (tubo en el que va a ir el buffer).
-
-```py
-# ------------------------
-# Protocol parameters (OUTPUTS)
-# ------------------------
-num_destinations = 96                           # number of slots for the destination rack
-volume_to_be_moved = 300                        # volume in uL to be moved from 1 source to 1 destination
-tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
-```
-
-> **1er parámetro:** establece el número total de tubos a atender (como destino).  
-**2º parámetro:** cantidad en µL a dispensar de buffer.  
-**3er parámetro:** tipo de tubo a usar como destino.
-
-
-## Protocolo **Dispensar muestras deepwell**
-
-```py
-# ------------------------
-# Sample specific parameters (INPUTS)
-# ------------------------
-buffer_name = 'Lisis'                      # Selected buffer for this protocol
-num_samples = 96                           # total number of samples
-tube_type_source = 'ependor'                 # Selected source tube for this protocol
-```
-
-> **1er parámetro:** establece el buffer a utilizar.  
-**2º parámetro:** establece el número total de tubos a atender (como origen).  
-**3er parámetro:** tipo de tubo a usar como origen.
-
-```py
-# ------------------------
-# Protocol parameters (OUTPUTS)
-# ------------------------
-num_destinations = 96                      # total number of destinations
-volume_to_be_transfered = 300              # volume in uL to be moved from 1 source to 1 destination
-```
-
-> **1er parámetro:** establece el número total de tubos a atender (como destino).  
-**2º parámetro:** cantidad en µL a dispensar.
-
-
-## Protocolo **Pooling Deepwell, Pooling Hamilton**
-
-```py
-# ------------------------
-# Sample specific parameters (INPUTS)
-# ------------------------
-buffer_name = 'Lisis'                        # Selected buffer for this protocol
-tube_type_source = 'ependor'                 # Selected destination tube for this protocol                        # Selected buffer for this protocol
-```
-
-> **1er parámetro:** establece el buffer a utilizar.  
-**2º parámetro:** tipo de tubo de origen (tubo en el que va a ir el buffer).
-
-```py
-# ------------------------
-# Protocol parameters (OUTPUTS)
-# ------------------------
-num_samples = 95                      # total number of destinations
-volume_to_be_transfered = 300         # volume in uL to be moved from 1 source to 1 destination
-pooling_factor = 5                    # num of destinations per source
-```
-> **1er parámetro:** número total de destinos.  
-**2º parámetro:** cantidad en µL a dispensar.  
-**3er parámetro:** número de origenes para un destino.  
-**P. ej:** Si *pooling_factor* es igual a 4 -> `las coordenadas A1, B1, C1, D1 del rack, van al A1 del deepwell`
-
-
-## Protocolo **Seroteca**
-
-```py
-# ------------------------
-# Sample specific parameters (INPUTS)
-# ------------------------
-buffer_name = 'Lisis'                           # Selected buffer for this protocol
-tube_type_dest = 'ependor'                      # Selected destination tube for this protocol
-```
-
-> **1er parámetro:** establece el buffer a utilizar.  
-**2º parámetro:** tipo de tubo de origen (tubo en el que va a ir el buffer).
-
-```py
-# ------------------------
-# Protocol parameters  (OUTPUTS)
-# ------------------------
-num_samples = 96                      # total number of destinations
-volume_sample = 995                   #
-```
-
->
-
-
-# Protocolo B
-
-```
-TODO
-```
-
-# Protocolo C
-
-## Protocolos **PCR Full Setup** - **PCR Setup** - **RNA-Teca**
-
-```py
-# ------------------------
-# Protocol parameters (OUTPUTS)
-# ------------------------
-NUM_SAMPLES = 16                            # total number of destinations
-brand_name = 'vircell'                      # commercial brand name
-```
-
-> **1er parámetro:** establece el número de destinos.  
-**2º parámetro:** nombre de la marca comercial.
-
-
-# Otros
 
 <a id="conexion"></a>
 
