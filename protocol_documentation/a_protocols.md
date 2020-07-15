@@ -103,14 +103,16 @@ tube_type_source = 'eppendorf'                 # Selected destination tube for t
 # Protocol parameters (OUTPUTS)
 # ------------------------
 num_samples = 95                      # total number of destinations
-volume_to_be_transfered = 300         # volume in uL to be moved
+volume_to_be_transfered = 300         # final volume in uL in the tube
 pooling_factor = 5                    # num of destinations per source
+dispense_height = -10                 # dispense height in the deepwell
 ```
 
 > **1er parámetro:** número total de destinos.  
 **2º parámetro:** cantidad en µL a dispensar.  
 **3er parámetro:** número de origenes para un destino.  
 **P. ej:** Si *pooling_factor* es igual a 4 -> `las coordenadas A1, B1, C1, D1 del rack, van al A1 del deepwell`
+**4º parámetro:** altura de dispensado en el deepwell.  
 
 ## Protocolo [**Seroteca**](img/labware_schema/protocol_a_seroteca.jpg)
 
@@ -122,8 +124,8 @@ Con la pipeta [P1000](labware.md/#puntas1000) cojemos cantidades de X ml de cada
 # ------------------------
 # Sample specific parameters (INPUTS)
 # ------------------------
-buffer_name = 'Lisis'                 # Selected buffer for this protocol
-tube_type_dest = 'eppendorf'          # Selected source tube for this protocol
+buffer_name = 'Lisis'                           # Selected buffer for this protocol
+tube_type_source = 'criotubo'                   # Selected destination tube for this protocol
 ```
 
 > **1er parámetro:** establece el buffer que contienen los tubos.  
@@ -133,9 +135,11 @@ tube_type_dest = 'eppendorf'          # Selected source tube for this protocol
 # ------------------------
 # Protocol parameters  (OUTPUTS)
 # ------------------------
-num_samples = 96                      # total number of destinations
-volume_sample = 995                   # volume in uL to be moved
+num_samples = 96                                # num of samples
+volume_sample = 995                             # final volume of sample
+tube_type_dest = 'criotubo'                     # Selected destination tube for this protocol
 ```
 
 > **1er parámetro:** número de tubos a usar.  
 **2º parámetro:** volumen de liquido a mover en μl.
+**3er parámetro:** tipo de tubo de destino.
