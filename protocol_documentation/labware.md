@@ -36,6 +36,26 @@
 * Nomenclatura no técnica: "de 2ml", de congelación
 * Uso: muestras
 
+<a id="criotubo_conico"></a>  
+
+## Criotubo cónico 
+
+![criotubo_conico](img/labware/criotubo_conico.jpg)  
+
+* Capacidad: 1.5ml
+* Nomenclatura no técnica: cónico
+* Uso: muestras
+
+<a id="serologia"></a>  
+
+## Serología 
+
+![serologia](img/labware/serologia.jpg)  
+
+* Capacidad: 8.5ml
+* Nomenclatura no técnica: tubo rojo
+* Uso: xxx
+
 <a id="f_redondo"></a>  
 
 ## Tubo fondo redondo  
