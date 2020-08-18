@@ -179,7 +179,7 @@
 
 ![rack15](img/labware/rack15.jpeg)  
 
-* Capacidad: 15 [falcon de 15ml](#falcon15).
+* Capacidad: 15 [falcon de 15ml](#falcon15) o 15 [tubos de serología](#serologia).
 * Load labware: *opentrons_15_tuberack_falcon_15ml_conical*
 
 <a id="rack4y6"></a>
