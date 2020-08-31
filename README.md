@@ -1,46 +1,219 @@
-# ot2-covid19
-Several scripts for Opentrons covid19 PCR preparation
+# Documentación labware
+> por Luis Lorenzo Mosquera, Victor Soroña Pombo & Ismael Castiñeira Paz  
+<pre>
+      @@@@@    @@@@@
+    @@@@          @@@@
+   @@@      @@      @@@    @@@@@@   @@@@@
+  @@@      @@@@      @@@   @@@@@@  @@@ @@@
+  @@     @@@@@@@@    @@@     @@         @@
+  @@    @@@    @@    @@@     @@        @@
+  @@@    @      @    @@@     @@       @@
+   @@@    @@@@@@    @@@      @@      @@
+    @@@@          @@@@       @@     @@@@@@
+      @@@@@@@@@@@@@@         @@    @@@@@@#
+         @@@@@@@@
+</pre>
 
-## Install Library
-To install our library with common functions to abstract the ot2 protocols, just required copy this folder in certain
-folder of Opentron's Raspberry Pi (in this case root's home, but could be wherever):
+# Tubos
 
-```sh
-# Before anything you required ssh access to RaspberryPi
-# Check this out ~> https://support.opentrons.com/en/articles/3203681-setting-up-ssh-access-to-your-ot-2
-scp -r -i ot2_ssh_key ot2-covid19 root@<robot-ip>:/root
-```
+<a id="eppendorf"></a>  
 
-If there is any update required you just have to upload a new version
+## Tubo eppendorf  
 
-## Development
-For including our custom library in the ot2 protocols we just to follow the next python snippet:
-```py
-import importlib
+![eppendorf](img/labware/eppendorf.jpeg)  
 
-# Load library
-LIBRARY_PATH = '/root/ot2-covid19/library/'     # <-- replace this path for where you copy the library (using scp)
-spec = importlib.util.spec_from_file_location("library.protocols.common_functions",                     # Which module are you loading
-                                              "{}protocols/common_functions.py".format(LIBRARY_PATH))   # Where is the load module
-common = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(common)
+* Capacidad: 1.5ml o 2ml
+* Nomenclatura no técnica: ???
+* Uso: muestras
 
-# .... 
-# rest of your code here
-common.generate_source_table(source)    # call the library's functions
-# ....
-```
+<a id="criotubo"></a>  
 
-## Common ot2 errors and possible solution
+## Criotubo  
 
-* **ACK timeout**: check if you have connection against the robot and then if everything is ok just wait a few minutes and
-re-run the protocol
+![criotubo](img/labware/criotubo.jpeg)  
 
-* **Robots pick up the tip and then doesn't move**: reboot robot using reboot command through ssh
+* Capacidad: 2ml
+* Nomenclatura no técnica: "de 2ml", de congelación
+* Uso: muestras
 
-* **Any error in library's subroutine**: when there is an error in library's subroutine the opentrons app doesn't show the line
-just specify where you call the subroutine. Then a trick to find out the bug could be copy the common library function and
-paste it in the protocol as a function then re-run the protocol in this way we can discovery where is the exactly line where 
-the bug is.
+<a id="criotubo_conico"></a>  
 
-## Configure opentrons simulator in PyCharm for debugging (WIP)
+## Criotubo cónico 
+
+![criotubo_conico](img/labware/criotubo_conico.jpg)  
+
+* Capacidad: 1.5ml
+* Nomenclatura no técnica: cónico
+* Uso: muestras
+
+<a id="serologia"></a>  
+
+## Serología 
+
+![serologia](img/labware/serologia.jpg)  
+
+* Capacidad: 8.5ml
+* Nomenclatura no técnica: tubo rojo
+* Uso: xxx
+
+<a id="f_redondo"></a>  
+
+## Tubo fondo redondo  
+
+![redondo](img/labware/redondo.jpeg)  
+
+* Capacidad: 3ml
+* Nomenclatura no técnica: "de 13x75"
+* Uso: muestras
+
+<a id="falcon50"></a>  
+
+## Falcon 50ml  
+
+![falcon](img/labware/falcon50.jpeg)  
+
+* Capacidad: Hasta 50ml
+* Nomenclatura no técnica: biberón
+* Uso: buffer
+
+<a id="falcon15"></a>  
+
+## Falcon 15ml  
+
+![falcon15](img/labware/falcon15.jpg)  
+
+* Capacidad: 2ml
+* Nomenclatura no técnica: "de tapa verde"
+* Uso: ???
+
+# Puntas
+
+<a id="puntas1000"></a>  
+
+## Puntas para pipeta p1000  
+
+![puntas1000](img/labware/puntas1000.jpeg)  
+
+* Capacidad: de 100µl a 1000µl
+* Compatibles: Socorex®, Calibra/Acura®, VWR®, Matrix®, Nichiryo/Oxford®, Rainin®, Biohit®, Capp Aero®, Eppendorf®, Thermo®, Gilson®
+* Load labware: *opentrons_96_filtertiprack_1000ul*
+
+<a id="puntas300"></a>  
+
+## Puntas para pipeta p300  
+
+![puntas300](img/labware/puntas300.jpeg)  
+
+* Capacidad: de 100µl a 200µl  
+* Compatibles: Socorex®, Calibra/Acura®, VWR®, Matrix®, Nichiryo/Oxford®, Rainin®, Biohit®, Capp Aero®, Eppendorf®, Thermo®, Gilson®
+* Load labware: *opentrons_96_filtertiprack_300ul*
+
+<a id="puntas20"></a>  
+
+## Puntas para pipeta P20  
+
+![puntas20](img/labware/puntas20.jpeg)  
+
+* Capacidad: de 10µl a 20µl
+* Compatibles: Socorex®, Calibra/Acura®, VWR®, Matrix®, Nichiryo/Oxford®, Rainin®, Biohit®, Capp Aero®, Eppendorf®, Thermo®, Gilson®
+* Load labware: *opentrons_96_filtertiprack_20ul*
+
+# Deepwells
+
+<a id="deepwell195ml"></a>
+
+## Deepwell 195ml  
+
+![deepwell195ml](img/labware/deepwell195ml.jpeg)
+
+<a id="deepwell15ml"></a>  
+
+## Deepwell 15ml  
+
+![deepwell15ml](img/labware/deepwell15ml.jpeg)
+
+<a id="deepwell2ml"></a>  
+
+## Deepwell 2ml  
+
+![deepwell2ml](img/labware/deepwell2ml.jpeg)
+
+<a id="pcrplate"></a>
+
+## PCR Plate  
+
+![pcr_plate](img/labware/pcr_plate.jpeg)
+
+# Racks
+
+<a id="rack96_alum"></a>
+
+## Rack 96 (Aluminio)  
+
+![rack96_alum](img/labware/rack96_alum.jpeg)  
+
+* Capacidad: 1 [pcr plate](#pcrplate)  
+* Load labware: *abi_fast_qpcr_96_alum_opentrons_100ul*  
+
+<a id="rack24"></a>
+
+## Rack 24  
+
+![rack24](img/labware/rack24.jpeg)  
+
+* Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos eppendorf](#eppendorf) o [criotubos](#criotubo).
+* Load labware: *opentrons_24_tuberack_generic_2ml_screwcap*
+
+<a id="rack24_alum"></a>
+
+## Rack 24 (Aluminio)  
+
+![rack24_alum](img/labware/rack24_alum.jpeg)  
+
+* Capacidad: 24 [tubos de fondo redondo](#f_redondo), [tubos eppendorf](#eppendorf) o [criotubos](#criotubo).
+* Load labware: *opentrons_24_aluminumblock_generic_2ml_screwcap*
+
+<a id="rack15"></a>
+
+## Rack 15  
+
+![rack15](img/labware/rack15.jpeg)  
+
+* Capacidad: 15 [falcon de 15ml](#falcon15) o 15 [tubos de serología](#serologia).
+* Load labware: *opentrons_15_tuberack_falcon_15ml_conical*
+
+<a id="rack4y6"></a>
+
+## Rack mixto  
+
+![rack4y6](img/labware/rack4y6.jpeg)  
+
+* Capacidad: 4 [tubos falcon 50ml](#falcon50) y 6 [tubos falcon 15ml](#falcon15).
+* Load labware: *opentrons_10_tuberack_nest_4x50ml_6x15ml_conical*
+
+<a id="rack6"></a>
+
+## Rack 6  
+
+![rack6](img/labware/rack6.jpeg)  
+
+* Capacidad: 6 [tubos falcon 50ml](#falcon50).
+* Load labware: *opentrons_6_tuberack_falcon_50ml_conical*
+
+# Módulos
+
+<a id="m_magnetico"></a>
+
+## Módulo magnético  
+
+![mag_module](img/labware/mag_module.jpg)  
+
+* Load labware: *magnetic module*
+
+<a id="m_temperatura"></a>
+
+## Módulo de temperatura  
+
+![temp_module](img/labware/temp_module.jpg)  
+
+* Load labware: *temperature module gen2*
